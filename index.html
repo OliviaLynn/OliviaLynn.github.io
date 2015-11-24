@@ -22,6 +22,11 @@
     margin-bottom: -13px;
   }
 
+  .icons:hover {
+    fill: red;
+    text-anchor: beginning;
+  }
+
   </style>
 </head>
 
@@ -33,11 +38,12 @@ var bgCol = "#29342E";
 var center = 450;
 var boxH = 300;
 var textSize = "160px";
+var showIcons = false;
 
 var firstName = ["O", "L", "I", "V", "I", "A"];
 var lastName = ["L", "Y", "N", "N"];
-var firstOffset = [0,10, 15, -25, -5, -30];
-var lastOffset = [10, -5, -2, 0];
+var firstOffset = [0, 20, 15, -25, -5, -50];
+var lastOffset = [0, -20, -10, 0];
 
 var barkLines = [15, 50, 75, 140, width-100, width-60, width-30];
 var barkLines2 = [10, 25, 70, 125, width-100, width-30, width-10];
@@ -46,15 +52,58 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
+function initDraw() {
+  svg.append("rect")
+    .attr("class", "base")
+    .attr("x", 0)
+    .attr("y", center - 5)
+    .attr("width", width)
+    .attr("height", 10)
+    .attr("fill", "#FFFFC0");
+
+  svg.selectAll("first")
+    .data(firstName)
+    .enter()
+    .append("text")
+    .attr("class", "first")
+    .text(function(d) {return d;})
+    .attr("x", function(d,i) {return 110*i + firstOffset[i];})
+    .attr("y", center-5+60)
+    .style("fill", "#70694D")
+    .style("font-size", textSize)
+
+  svg.selectAll("last")
+    .data(lastName)
+    .enter()
+    .append("text")
+    .attr("class", "last")
+    .text(function(d) {return d;})
+    .attr("x", function(d,i) {return width-(110*4)-20 + 110*i + lastOffset[i];}) //TODO make dynamic
+    .attr("y", center+5+45)
+    .style("fill", "#70694D")
+    .style("font-size", textSize)
+  }
+initDraw();
+
 $( document ).on( "mousemove", function( event ) {
   svg.selectAll(".base").remove();
   svg.selectAll(".first").remove();
   svg.selectAll(".last").remove();
+  svg.selectAll(".icons").remove();
 
   var currentHeight;
-  if (event.pageY < center*0.5) currentHeight = Math.max(10, event.pageY*2);
-  else if (center*0.5 <= event.pageY && event.pageY <= center*1.5) currentHeight = center;
-  else currentHeight = Math.max(10, (center - (event.pageY - center))*2);
+  if (event.pageY < center*0.5) {
+    currentHeight = Math.max(10, event.pageY*2);
+    showIcons = false;
+  }
+  else if (center*0.5 <= event.pageY && event.pageY <= center*1.5) {
+    currentHeight = center;
+    showIcons = true;
+  }
+  else {
+    currentHeight = Math.max(10, (center - (event.pageY - center))*2);
+    showIcons = false;
+  }
   svg.append("rect")
     .attr("class", "base")
     .attr("x", 0)
@@ -106,22 +155,91 @@ $( document ).on( "mousemove", function( event ) {
     .attr("y", center+currentHeight/2+45)
     .style("fill", "#70694D")
     .style("font-size", textSize)
+
+    drawIcons();
 })
-/*
-  svg.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width)
-    .attr("height", (height - boxH)/2)
-    .attr("fill", bgCol);
 
-    svg.append("rect")
-      .attr("x", 0)
-      .attr("y", height-(height - boxH)/2)
-      .attr("width", width)
-      .attr("height", (height - boxH)/2)
-      .attr("fill", bgCol);
-*/
+var iconData = [
+  {
+    title: "about me",
+    symbol: "a",
+    link: "http://olivialynn.github.io",
+    color: "#EBE9B0"
+  },
+  {
+    title: "github",
+    symbol: "g",
+    link: "https://github.com/OliviaLynn",
+    color: "#EBE9B0"
+  },
+  {
+    title: "twitter",
+    symbol: "t",
+    link: "https://twitter.com/livie_is_me",
+    color: "#EBE9B0"
+  },
+  {
+    title: "melody: a js game",
+    symbol: "m",
+    link: "http://olivialynn.github.io/melody",
+    color: "#EBE9B0"
+  }
+];
+
+var iconCol = "#EBE9B0";
+
+function drawIcons() {
+var iconWidth = 200;
+if (showIcons) {
+
+  svg.selectAll("icons")
+    .data(iconData)
+    .enter()
+    .append("a")
+    .attr("xlink:href", function(d) {return d.link;})
+    .append("text")
+    .attr("class", "icons")
+    .text(function(d) {
+      return d.symbol;
+    })
+    .attr("x", function(d, i) {
+      return (width/2 - (iconData.length-1)*iconWidth/2) + iconWidth*i;
+    })
+    .attr("y", center + 10)
+    .style("fill", function(d) {
+      return d.color; })
+    .style("font-size", 72)
+    .style("text-anchor", "middle")
+    /*
+    .on("mouseenter", function(d) {
+      d.color = "red";
+    })
+    .on("mouseleave", function(d) {
+      console.log("dsf");
+      d.color = iconCol;
+    })*/;
+
+  svg.selectAll("icons")
+    .data(iconData)
+    .enter()
+    .append("a")
+    .attr("xlink:href", function(d) {return d.link;})
+    .append("text")
+    .attr("class", "icons")
+    .text(function(d) { return d.title; })
+    .attr("x", function(d, i) {
+      return (width/2 - (iconData.length-1)*iconWidth/2) + iconWidth*i;
+    })
+    .attr("y", center)
+    .style("fill", bgCol)
+    .style("font-weight", "100")
+    .style("font-size", 18)
+    .style("text-anchor", "middle");
+}
+}
+
+
+svg.selectAll(".icons")
 
 
 
@@ -129,18 +247,6 @@ $( document ).on( "mousemove", function( event ) {
 
 
 
-
-
-
-
-/*
-  svg.selectAll("circle")
-      .data([32, 57, 112, 293])
-    .enter().append("circle")
-      .attr("cy", 60)
-      .attr("cx", function(d, i) { return i * 100 + 30; })
-      .attr("r", function(d) { return Math.sqrt(d); });
-*/
 </script>
 </body>
 </HTML>
