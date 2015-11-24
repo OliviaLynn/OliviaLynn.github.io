@@ -1,8 +1,146 @@
 <!DOCTYPE HTML>
+<link href='https://fonts.googleapis.com/css?family=Chivo:400,900' rel='stylesheet' type='text/css'>
+<script src="d3.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <head>
+  <title>Olivia Lynn: Code + Colors</title>
+  <style>
+  body {
+    background-color: #29342E;
+  }
+
+  * {
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-size: 125%;
+    text-align: center;
+  }
+
+  svg {
+    margin-top: -8px;
+    margin-bottom: -13px;
+  }
+
+  </style>
 </head>
 
 <body>
-<h1>Olivia Lynn</h1>
+<script>
+
+var width = 1850, height = 900;
+var bgCol = "#29342E";
+var center = 450;
+var boxH = 300;
+var textSize = "160px";
+
+var firstName = ["O", "L", "I", "V", "I", "A"];
+var lastName = ["L", "Y", "N", "N"];
+var firstOffset = [0,10, 15, -25, -5, -30];
+var lastOffset = [10, -5, -2, 0];
+
+var barkLines = [15, 50, 75, 140, width-100, width-60, width-30];
+var barkLines2 = [10, 25, 70, 125, width-100, width-30, width-10];
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+$( document ).on( "mousemove", function( event ) {
+  svg.selectAll(".base").remove();
+  svg.selectAll(".first").remove();
+  svg.selectAll(".last").remove();
+
+  var currentHeight;
+  if (event.pageY < center*0.5) currentHeight = Math.max(10, event.pageY*2);
+  else if (center*0.5 <= event.pageY && event.pageY <= center*1.5) currentHeight = center;
+  else currentHeight = Math.max(10, (center - (event.pageY - center))*2);
+  svg.append("rect")
+    .attr("class", "base")
+    .attr("x", 0)
+    .attr("y", center - currentHeight/2)
+    .attr("width", width)
+    .attr("height", currentHeight)
+    .attr("fill", "#FFFFC0");
+
+  svg.selectAll("barkLines")
+    .data(barkLines)
+    .enter()
+    .append("rect")
+    .attr("class", "base")
+    .attr("x", function(d) { return d; })
+    .attr("y", center - currentHeight/2)
+    .attr("width", 20)
+    .attr("height", currentHeight)
+    .attr("fill", "#EBE9B0");
+
+  svg.selectAll("barkLines2")
+    .data(barkLines2)
+    .enter()
+    .append("rect")
+    .attr("class", "base")
+    .attr("x", function(d) { return d+15; })
+    .attr("y", center - currentHeight/2)
+    .attr("width", 5)
+    .attr("height", currentHeight)
+    .attr("fill", "#B8B690");
+
+  svg.selectAll("first")
+    .data(firstName)
+    .enter()
+    .append("text")
+    .attr("class", "first")
+    .text(function(d) {return d;})
+    .attr("x", function(d,i) {return 110*i + firstOffset[i];})
+    .attr("y", center-currentHeight/2+60)
+    .style("fill", "#70694D")
+    .style("font-size", textSize)
+
+  svg.selectAll("last")
+    .data(lastName)
+    .enter()
+    .append("text")
+    .attr("class", "last")
+    .text(function(d) {return d;})
+    .attr("x", function(d,i) {return width-(110*4)-20 + 110*i + lastOffset[i];}) //TODO make dynamic
+    .attr("y", center+currentHeight/2+45)
+    .style("fill", "#70694D")
+    .style("font-size", textSize)
+})
+/*
+  svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", (height - boxH)/2)
+    .attr("fill", bgCol);
+
+    svg.append("rect")
+      .attr("x", 0)
+      .attr("y", height-(height - boxH)/2)
+      .attr("width", width)
+      .attr("height", (height - boxH)/2)
+      .attr("fill", bgCol);
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+  svg.selectAll("circle")
+      .data([32, 57, 112, 293])
+    .enter().append("circle")
+      .attr("cy", 60)
+      .attr("cx", function(d, i) { return i * 100 + 30; })
+      .attr("r", function(d) { return Math.sqrt(d); });
+*/
+</script>
 </body>
 </HTML>
