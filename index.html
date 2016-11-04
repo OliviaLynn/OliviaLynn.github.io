@@ -1,251 +1,160 @@
 <!DOCTYPE HTML>
-<link href='https://fonts.googleapis.com/css?family=Chivo:400,900' rel='stylesheet' type='text/css'>
-<script src="d3.js" charset="utf-8"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <head>
-  <title>Olivia Lynn: Code + Colors</title>
+  <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600" rel="stylesheet">
+
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
   <style>
-  body {
-    background-color: #29342E;
-  }
-
   * {
-    color: #ccc;
-    font-family: Arial, sans-serif;
-    font-weight: 900;
-    font-size: 125%;
+    font-family: 'Bungee Hairline', cursive;
+    font-weight: bold;
+    padding-top:5px;
+  }
+  .sidebar {
+    background-color: #fff; /*#dee;*/
+    width: 17%;
+    right: 8%;
+    height: 90%;
     text-align: center;
+    position: absolute;
   }
-
-  svg {
-    margin-top: -8px;
-    margin-bottom: -13px;
+  .sidebar p {
+    margin: 0px;
   }
-
-  .icons:hover {
-    fill: red;
+  .main {
+    width: 58%;
+    left: 10%;
+    position: absolute;
   }
+  .main p {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+  }
+  .main span {
 
+      float:right;
+  }
+  h2, h3 {
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+  .worktitle {
+    border-bottom: 1px solid black;
+  }
+  .entry {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #818181;
+    padding:15px;
+    margin-top: 20px;
+  }
+  .notpic {
+    width: 100%;
+  }
+  .picmargin {
+    margin: 10px;
+  }
+  .pic {
+    border: 1px solid #818181;
+  }
+  #description {
+    display: none;
+  }
+  .orange {
+    color: #DC9C60;
+    font-size: 24px;
+  }
+  .yellow {
+    color: #EAC661;
+    font-size: 24px;
+  }
+  .blue {
+    color: #61D9ED;
+    font-size: 24px;
+  }
+  h1 {
+    text-align: right;
+    font-size: 100%;
+    margin: -10px;
+    margin-right: 10px;
+    font-family: 'Bungee Hairline', cursive;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
+  }
+  /*
+  //Colors:
+    var HR_color = "#DC9C60";
+    var TEMP_color = "#EAC661";
+    var GYRO_y_color = "#61D9ED";
+    var GYRO_z_color = "#4AB3C8";
+*/
   </style>
 </head>
-
 <body>
-<script>
-
-var width = 1850, height = 900;
-var bgCol = "#29342E";
-var center = 450;
-var boxH = 300;
-var textSize = "160px";
-var showIcons = false;
-
-var firstName = ["O", "L", "I", "V", "I", "A"];
-var lastName = ["L", "Y", "N", "N"];
-var firstOffset = [0, 20, 15, -25, -5, -50];
-var lastOffset = [0, -20, -10, 0];
-
-var barkLines = [15, 50, 75, 140, width-100, width-60, width-30];
-var barkLines2 = [10, 25, 70, 125, width-100, width-30, width-10];
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-function initDraw() {
-  svg.append("rect")
-    .attr("class", "base")
-    .attr("x", 0)
-    .attr("y", center - 5)
-    .attr("width", width)
-    .attr("height", 10)
-    .attr("fill", "#FFFFC0");
-
-  svg.selectAll("first")
-    .data(firstName)
-    .enter()
-    .append("text")
-    .attr("class", "first")
-    .text(function(d) {return d;})
-    .attr("x", function(d,i) {return 110*i + firstOffset[i];})
-    .attr("y", center-5+60)
-    .style("fill", "#70694D")
-    .style("font-size", textSize)
-
-  svg.selectAll("last")
-    .data(lastName)
-    .enter()
-    .append("text")
-    .attr("class", "last")
-    .text(function(d) {return d;})
-    .attr("x", function(d,i) {return width-(110*4)-20 + 110*i + lastOffset[i];}) //TODO make dynamic
-    .attr("y", center+5+45)
-    .style("fill", "#70694D")
-    .style("font-size", textSize)
-  }
-initDraw();
-
-$( document ).on( "mousemove", function( event ) {
-  svg.selectAll(".base").remove();
-  svg.selectAll(".first").remove();
-  svg.selectAll(".last").remove();
-  svg.selectAll(".icons").remove();
-
-  var currentHeight;
-  if (event.pageY < center*0.5) {
-    currentHeight = Math.max(10, event.pageY*2);
-    showIcons = false;
-  }
-  else if (center*0.5 <= event.pageY && event.pageY <= center*1.5) {
-    currentHeight = center;
-    showIcons = true;
-  }
-  else {
-    currentHeight = Math.max(10, (center - (event.pageY - center))*2);
-    showIcons = false;
-  }
-  svg.append("rect")
-    .attr("class", "base")
-    .attr("x", 0)
-    .attr("y", center - currentHeight/2)
-    .attr("width", width)
-    .attr("height", currentHeight)
-    .attr("fill", "#FFFFC0");
-
-  svg.selectAll("barkLines")
-    .data(barkLines)
-    .enter()
-    .append("rect")
-    .attr("class", "base")
-    .attr("x", function(d) { return d; })
-    .attr("y", center - currentHeight/2)
-    .attr("width", 20)
-    .attr("height", currentHeight)
-    .attr("fill", "#EBE9B0");
-
-  svg.selectAll("barkLines2")
-    .data(barkLines2)
-    .enter()
-    .append("rect")
-    .attr("class", "base")
-    .attr("x", function(d) { return d+15; })
-    .attr("y", center - currentHeight/2)
-    .attr("width", 5)
-    .attr("height", currentHeight)
-    .attr("fill", "#B8B690");
-
-  svg.selectAll("first")
-    .data(firstName)
-    .enter()
-    .append("text")
-    .attr("class", "first")
-    .text(function(d) {return d;})
-    .attr("x", function(d,i) {return 110*i + firstOffset[i];})
-    .attr("y", center-currentHeight/2+60)
-    .style("fill", "#70694D")
-    .style("font-size", textSize)
-
-  svg.selectAll("last")
-    .data(lastName)
-    .enter()
-    .append("text")
-    .attr("class", "last")
-    .text(function(d) {return d;})
-    .attr("x", function(d,i) {return width-(110*4)-20 + 110*i + lastOffset[i];}) //TODO make dynamic
-    .attr("y", center+currentHeight/2+45)
-    .style("fill", "#70694D")
-    .style("font-size", textSize)
-
-    drawIcons();
-})
-
-var iconData = [
-  {
-    title: "about me",
-    symbol: "a",
-    link: "about.html",
-    color: "#EBE9B0"
-  },
-  {
-    title: "github",
-    symbol: "g",
-    link: "https://github.com/OliviaLynn",
-    color: "#EBE9B0"
-  },
-  {
-    title: "twitter",
-    symbol: "t",
-    link: "https://twitter.com/livie_is_me",
-    color: "#EBE9B0"
-  },
-  {
-    title: "melody: a js game",
-    symbol: "m",
-    link: "http://olivialynn.github.io/melody",
-    color: "#EBE9B0"
-  }
-];
-
-var iconCol = "#EBE9B0";
-
-function drawIcons() {
-var iconWidth = 200;
-if (showIcons) {
-
-  svg.selectAll("icons")
-    .data(iconData)
-    .enter()
-    .append("a")
-    .attr("xlink:href", function(d) {return d.link;})
-    .append("text")
-    .attr("class", "icons")
-    .text(function(d) {
-      return d.symbol;
-    })
-    .attr("x", function(d, i) {
-      return (width/2 - (iconData.length-1)*iconWidth/2) + iconWidth*i;
-    })
-    .attr("y", center + 10)
-    .style("fill", function(d) {
-      return d.color; })
-    .style("font-size", 72)
-    .style("text-anchor", "middle")
-    /*
-    .on("mouseenter", function(d) {
-      d.color = "red";
-    })
-    .on("mouseleave", function(d) {
-      console.log("dsf");
-      d.color = iconCol;
-    })*/;
-
-  svg.selectAll("icons")
-    .data(iconData)
-    .enter()
-    .append("a")
-    .attr("xlink:href", function(d) {return d.link;})
-    .append("text")
-    .attr("class", "icons")
-    .text(function(d) { return d.title; })
-    .attr("x", function(d, i) {
-      return (width/2 - (iconData.length-1)*iconWidth/2) + iconWidth*i;
-    })
-    .attr("y", center)
-    .style("fill", bgCol)
-    .style("font-weight", "100")
-    .style("font-size", 18)
-    .style("text-anchor", "middle");
-}
-}
-
-
-svg.selectAll(".icons")
-
-
-
-
-
-
-
-</script>
+  <!--div class="title">
+    <h1>Olivia Lynn</h1>
+    <hr />
+  </div-->
+  <div class="sidebar">
+    <br />
+    <p>Hello!</p>
+    <br />
+    <p>My name is</p>
+    <p class='orange'>Olivia Lynn</p>
+    <br />
+    <p>I study</p>
+    <p class='yellow'>Comp Sci + Art</p>
+    <p>at Carnegie Mellon</p>
+    <br />
+    <p>I'm really interested in</p>
+    <p class='blue'>Data viz</p>
+    <p>and</p>
+    <p class='blue'>Healthcare</p>
+  </div>
+  <div class="main">
+    <div class="worktitle">
+      <h2>My Work</h2>
+    </div>
+    <div class="entry">
+      <span class="date">01/25/16</span>
+      <h3>Another Project</h3>
+      <p>React | Flux | Webpack</p>
+      <p>This is a short description of what the project is and maybe also how I made it.</p>
+    </div>
+    <div>
+      <div>
+        <table>
+          <th></th>
+          <tbody>
+            <tr>
+              <td class="entry pic">
+                Picture
+              </td>
+              <td>
+                <div class="picmargin"></div>
+              </td>
+              <td class="entry notpic">
+                <div>
+                  <span class="date">01/23/16</span>
+                  <h3>Project Title: And a Brief Subtitle</h3>
+                  <p>React | Flux | Webpack</p>
+                  <p>This is a short description of what the project is and maybe also how I made it.</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <div>
+  </div>
 </body>
 </HTML>
