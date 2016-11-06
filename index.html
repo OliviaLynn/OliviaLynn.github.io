@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <head>
+  <title>Olivia Lynn</title>
   <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
@@ -11,38 +12,54 @@
   crossorigin="anonymous"></script>
   <style>
   * {
-    font-family: 'Bungee Hairline', cursive;
-    font-weight: bold;
+    font-family: 'Open Sans', serif;
+    font-weight: 300;
     padding-top:5px;
+  }
+  a {
+    color: #4AB3C8;
+    font-family: 'Bungee Hairline', serif;
+    font-weight: bold;
   }
   .sidebar {
     background-color: #fff; /*#dee;*/
     width: 17%;
-    right: 8%;
-    height: 90%;
+    right: 7%;
+    height: 110%;
     text-align: center;
     position: absolute;
+    padding-top: 6%;
+    margin-top: -2%;
   }
   .sidebar p {
-    margin: 0px;
+    margin: -15px;
+    font-family: 'Bungee Hairline', serif;
+    font-weight: bold;
   }
   .main {
-    width: 58%;
+    width: 60%;
     left: 10%;
     position: absolute;
   }
-  .main p {
+  .main p, span, ul, li{
     font-size: 12px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
   }
-  .main span {
-
-      float:right;
+  b {
+    font-weight: normal;
   }
-  h2, h3 {
-    margin-top: -10px;
-    margin-bottom: -10px;
+  ul {
+    list-style: circle;
+  }
+  .main span {
+    float:right;
+  }
+  h1, h2, h3 {
+    font-family: 'Bungee Hairline', serif;
+    font-weight: bold;
+    margin-top: -14px;
+    margin-bottom: -14px;
   }
   .worktitle {
     border-bottom: 1px solid black;
@@ -53,15 +70,24 @@
     border-color: #818181;
     padding:15px;
     margin-top: 20px;
+    background-color: #fff;
   }
   .notpic {
-    width: 100%;
+    padding-bottom: 20px;
+  }
+  td {
+    padding-bottom: 0px;
+    /* TODO even out bottom spacing between picture/nonpicture posts */
   }
   .picmargin {
     margin: 10px;
   }
   .pic {
+    background: url(http://i.imgur.com/FMEUcEu.jpg) 45% 50% no-repeat;
+    background-size: cover;
     border: 1px solid #818181;
+    min-width: 150px;
+
   }
   #description {
     display: none;
@@ -83,12 +109,15 @@
     font-size: 100%;
     margin: -10px;
     margin-right: 10px;
-    font-family: 'Bungee Hairline', cursive;
+    font-family: 'Bungee Hairline', serif;
   }
   hr {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
+  }
+  .letsgetpersonal {
+    display: none;
   }
   /*
   //Colors:
@@ -100,35 +129,54 @@
   </style>
 </head>
 <body>
-  <!--div class="title">
-    <h1>Olivia Lynn</h1>
-    <hr />
-  </div-->
   <div class="sidebar">
-    <br />
     <p>Hello!</p>
-    <br />
+    <br /><br />
     <p>My name is</p>
     <p class='orange'>Olivia Lynn</p>
-    <br />
+    <br /><br />
     <p>I study</p>
     <p class='yellow'>Comp Sci + Art</p>
     <p>at Carnegie Mellon</p>
-    <br />
+    <br /><br />
     <p>I'm really interested in</p>
     <p class='blue'>Data viz</p>
     <p>and</p>
     <p class='blue'>Healthcare</p>
+    <br /><br />
+    <p>Check out</p>
+    <p><a href='#'>My Work</a></p>
+    <p><a href='#'>Readings + Reviews</a></p>
+    <p><a href='https://github.com/OliviaLynn'>My Github</a></p>
+    <p><a href='#'>About Me</a></p>
   </div>
   <div class="main">
     <div class="worktitle">
       <h2>My Work</h2>
     </div>
     <div class="entry">
-      <span class="date">01/25/16</span>
-      <h3>Another Project</h3>
-      <p>React | Flux | Webpack</p>
-      <p>This is a short description of what the project is and maybe also how I made it.</p>
+      <span class="date">11/04/16</span>
+      <h3>Review: <a href='http://tech.gotinder.com/smart-photos-2/'>Smart Photos</a></h3>
+      <p>Mobile Apps | Algorithms</p>
+      <p>This article is by Mike Hall, Machine Learning Lead at Tinder, about the Smart Photos feature he developed in a hackathon.  More specifically, it gives the reader an understanding both of his hackathon process and a couple of specific ideas, like multi-armed bandit optimization, epsilon greedy, and how to tailor an algorithm for your own use cases.  Three of the major reasons I like this article are:</p>
+      <ul>
+        <li><b>Light read</b>: It's an easily-absorbed, high-level explanation of an algorithm and how it was implemented</li>
+        <li><b>Unusual Information</b>: Gives a peek into Tinder's inner workings -Tinder just hosted its first internal hackathon? That sounds really fun!</li>
+        <li><b>Well-organized</b>: the articles takes you on a journey from the initial problem to a proposed solution to a step-by-step process of achieving that.  While the article surely skipped many failed or sub-par attempts, the progression of "how to pick the best photos?" > "we want A/B testing" > "let's do this as multi-armed bandit optimization" > "which algorithm?" > "epsilon greedy looks good" > "now let's alter this to make it work for tinder" is very compelling from both a narrative and an instructional standpoint</li>
+      </ul>
+      <p class="letsgetpersonal">My own personal takeaway is probably mostly research-oriented.  Often, when doing something completely new, I often wonder how much time I should be spending researching rather than doing.  It's easy to spend all your time reading about something and only feeling more and more overwhelmed at how little you know; at the same time, it's also easy to jump into something and spend far too much time reinventing the wheel, when a little reading might have taught you about wheels.</p>
+      <p class="letsgetpersonal">I also learned a bit of new stuff about ranking algorithms, too, which is great.  And as always, I love watching the process of someone doing something, whether a description of their thought process (as in this article), or a video of live coding (especially the sped-up 48hr viedos from Ludum Dare!!), autobiographies (in the middle of athenahealth's cofounder's Where Does It Hurt? and it's really good so far), speedpaints, etc.</p>
+    </div>
+    <div class="entry notpic">
+      <span class="date">11/04/16</span>
+      <h3>This Site</h3>
+      <p>HTML | CSS</p>
+      <p>It's about time I made a site for myself and not other people! While I've looked into tools like Jekyll that would let me keep on using Node.js - and do intend to try Jekyll out sometime for a project that demands it more - it's been a nice excuse to actually use pure html for once.</p>
+      <span><a href='https://github.com/OliviaLynn/OliviaLynn.github.io'>View Code</a></span>
+      <br />
+
+      <p class="letsgetpersonal">Still, there's no way I'll be able to resist making some really nice interface to generate all the html and perform mass edits and everything else.</p>
+      <p class="letsgetpersonal">Also, I totally want to make the site weirdly interactive, plotting the user's mouse movement compared to everyone else's, time spent looking at what sections, how often they jiggle their mouse, how closely centered their clicks tend to be on links, etc.</p>
     </div>
     <div>
       <div>
@@ -137,17 +185,20 @@
           <tbody>
             <tr>
               <td class="entry pic">
-                Picture
               </td>
               <td>
                 <div class="picmargin"></div>
               </td>
               <td class="entry notpic">
                 <div>
-                  <span class="date">01/23/16</span>
-                  <h3>Project Title: And a Brief Subtitle</h3>
-                  <p>React | Flux | Webpack</p>
-                  <p>This is a short description of what the project is and maybe also how I made it.</p>
+                  <span class="date">11/10/16</span>
+                  <h3>Floffy Bird: An Exploration in Behavior and Empathy</h3>
+                  <p>Pololu 3pi | C++</p>
+                  <p>Floffy bird is a tiny fuzzy creature that isn’t afraid of any terrain. Plop it down on any path and it will follow the line all the way to the end. Watch out, though, because it still obeys some of the laws of the world – snow is cold! Floffy bird shivers a lot. Mud is tough, too, so its steps may start dragging – but slowly, slowly, floffy bird will make it through.</p>
+                  <p>So what is it scared of? Humans! If you pick it up, it’ll squeak and freeze, because it is just a tiny little bird. If you do decide to grab it, try rubbing its belly, and it just might calm down enough to move.</p>
+                  <span>
+                    <a href='https://drive.google.com/file/d/0B55Em_WlWaVJc08yeUxZc1lXZFU/view'>Watch Video</a>
+                     | <a href='https://github.com/OliviaLynn/FloffyBird'>View Code</a></span>
                 </div>
               </td>
             </tr>
