@@ -19,9 +19,16 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 
+.header-space{height:100px;}
 .sub-p {font-size: 13px;padding-left: 20px;}
+.nav-text{font-size: 10px;}
+
 .post-p {padding-left: 100px;}
 .post-ul {padding-left: 140px;}
+.post-head {}
+.post-title {font-size: 24px!important;}
+.post-date {padding-top: 8px;padding-bottom: 5px;}
+.post-small-date {text-align: right; color: #555}
 </style>
 <body class="w3-black">
 
@@ -42,7 +49,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-user w3-xlarge"></i>
     <p>ABOUT</p>
   </a>
-  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-th-list w3-xlarge"></i>
     <p>PROJECTS</p>
   </a>
@@ -55,11 +62,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:20% !important">HOME</a>
-    <a href="#news" class="w3-bar-item w3-button" style="width:20% !important">NEWS</a>
-    <a href="#about" class="w3-bar-item w3-button" style="width:20% !important">ABOUT</a>
-    <a href="#photos" class="w3-bar-item w3-button" style="width:20% !important">PROJECTS</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:20% !important">CONTACT</a>
+    <a href="#" class="nav-text w3-bar-item w3-button" style="width:20% !important">HOME</a>
+    <a href="#news" class="nav-text w3-bar-item w3-button" style="width:20% !important">NEWS</a>
+    <a href="#about" class="nav-text w3-bar-item w3-button" style="width:20% !important">ABOUT</a>
+    <a href="#projects" class="nav-text w3-bar-item w3-button" style="width:20% !important">PROJECTS</a>
+    <a href="#contact" class="nav-text w3-bar-item w3-button" style="width:20% !important">CONTACT</a>
   </div>
 </div>
 
@@ -67,33 +74,97 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <div class="header-space"></div>
     <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Olivia Lynn.</h1>
-    <p>Programmer and Artist.</p>
+    <p>Programmer + Artist</p>
+    <div class="header-space"></div>
     <!--img src="/images/woods_black.png" alt="header-image" class="w3-image" height="1108"-->
   </header>
 
   <!-- News Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="news">
     <h3 class="w3-padding-24 w3-text-light-grey">What I've Been Up To</h3>
+
+    <!-- TEMPLATE
+      <img src="/images/sq-yellow.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+      <p class="post-head">
+        <span class="w3-large w3-margin-right post-title">TITLE:</span>
+        Subtitle.
+        <span class="w3-right post-date w3-hide-small">[date]</span>
+      </p>
+      <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">small date</p>
+      <p>
+      </p>
+    -->
+
     <img src="/images/gene-kogan.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">Gene Kogan:</span> Machine Learning and Art talk at the Frank-Ratchye Studio for Creative Inquiry.<span class="w3-right">[2/11/18]</span></p>
-    <p class="post-p">It was fantastic to attend <a href="http://genekogan.com">Gene Kogan's</a> talk on Monday at CMU. He's a programmer and self-taught artist, who--for lack of better succinct wording--makes some really cool things and knows a bunch of other people who make cool things, too.</p>
-    <p class="">I have a <a href="http://bit.ly/notes-gene-kogan">3-page Google doc</a> full of people, projects, and tools he mentioned that I'm really excited to check out, but some of the highlights were:</p>
+    <p class="post-head">
+      <span class="w3-large w3-margin-right post-title">Gene Kogan:</span>
+      Machine Learning & Art Lecture.
+      <span class="w3-right post-date w3-hide-small">[2/11/18]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">February 11, 2018</p>
+    <p class="">
+      It was fantastic to attend <a href="http://genekogan.com">Gene Kogan's</a> talk on Monday at CMU. He's a programmer and self-taught artist, who--for lack of better succinct wording--makes some really cool things and knows a bunch of other people who make cool things, too.
+    </p>
+    <p class="">
+      I have a <a href="http://bit.ly/notes-gene-kogan">3-page Google doc</a> full of people, projects, and tools he mentioned that I'm really excited to check out, but some of the highlights were:
+    </p>
     <ul class="">
-      <li>Kogan's made musical instruments with <a href="http://www.scattershot.org/bio.htm">Jeff Snyder</a>, the current Director of Electronic Music at Princeton University (you know, if creating a <a href="https://www.snyderphonics.com/JD-1_reference_manual.pdf">specialty controller</a> that was <a href="https://www.snyderphonics.com/about.htm">commisioned by Buchla</a> weren't impressive enough). </li><li>Snyder's research makes me want to curl up with some hot chocolate on a Sunday afternoon and read about cutting edge digital lutherie, and can be viewed <a href="https://www.researchgate.net/profile/Jeff_Snyder6">here</a> and <a href="http://www.scattershot.org/research.htm">here</a>.</li>
-      <li>He mentioned <a href="http://quasimondo.com/">Mario Klingemann</a>, or Quasimondo, an artist in residence at Google Arts & Culture. Some of his pieces include <a href="http://underdestruction.com/2016/02/25/ernst/">generative collages</a> in the style of Ernst, though I think I like his work with generative adversarial networks (GANs) the most--<a href="http://underdestruction.com/2017/02/04/alternative-face/">controlling a person's face and their expressions</a> and a spooky music video that <a href="http://underdestruction.com/2017/07/23/freeda-beast-bringing-things-to-an-end/">interpolates between different faces</a>. </li>
-      <li>His project <a href="http://ml4a.github.io/">ml4a</a>, a compilation of guides and demos that teach machine learning for artists (or anyone, really). Just wow.</li>
+      <li>
+        Kogan's made musical instruments with <a href="http://www.scattershot.org/bio.htm">Jeff Snyder</a>, the current Director of Electronic Music at Princeton University (you know, if creating a <a href="https://www.snyderphonics.com/JD-1_reference_manual.pdf">specialty controller</a> that was <a href="https://www.snyderphonics.com/about.htm">commisioned by Buchla</a> weren't impressive enough).
+      </li>
+      <li>
+        Snyder's research makes me want to curl up with some hot chocolate on a Sunday afternoon and read about cutting edge digital lutherie, and can be viewed <a href="https://www.researchgate.net/profile/Jeff_Snyder6">here</a> and <a href="http://www.scattershot.org/research.htm">here</a>.
+      </li>
+      <li>
+        He mentioned <a href="http://quasimondo.com/">Mario Klingemann</a>, or Quasimondo, an artist in residence at Google Arts & Culture. Some of his pieces include <a href="http://underdestruction.com/2016/02/25/ernst/">generative collages</a> in the style of Ernst, though I think I like his work with generative adversarial networks (GANs) the most--<a href="http://underdestruction.com/2017/02/04/alternative-face/">controlling a person's face and their expressions</a> and a spooky music video that <a href="http://underdestruction.com/2017/07/23/freeda-beast-bringing-things-to-an-end/">interpolates between different faces</a>.
+      </li>
+      <li>
+        His project <a href="http://ml4a.github.io/">ml4a</a>, a compilation of guides and demos that teach machine learning for artists (or anyone, really). Just wow.
+      </li>
     </ul>
     <br>
+    <br>
+    <br>
 
-    <img src="/images/sq-yellow.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p><span class="w3-large w3-margin-right">MIM 2017.</span> NYC's Modular Synthesizer Conference.<span class="w3-right">[10/15/17]</span></p>
-    <p>Notes go here, once I type them up.</p>
-    <p>Rough draft of post from the old site:</p>
-    <p>I was lucky enough to attend 2017's Machines in Music Exhibition this past weekend, where I got to see (and get my hands on) some really cool new technology people are working on, like the --, --, and --.</p>
-    <p>The lectures were amazing, too--I think my favorite was about David Tudor, the organist/pianist who worked closesly with John Cage. Tutor later switched to composing and creating hundreds of instruments that he would wire together to create synthesized sound through feedback loops, which is particularly fun when compared to the usual modern methods of additive/subtractive/FM synthesis.</p>
-    <p>Some other highlights of the weekend include attending the release party for DETOUR 006. I saw some familiar faces and met some really interesting people, one of whom told me great things about The User Experience Team of One: A Research and Design Survival Guide. The book had made design intuitive to her, she said, even without a formal design background. I put it on my To Read list right away.</p>
-    <p>I was also fortunate enough to see Tokimonsta at the Brooklyn Electronic Music Festival, and as expected, seeing her play as if she had never had brain surgery was beyond words.</p>
+    <img src="/images/babycastles1.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p class="post-head">
+      <span class="w3-large w3-margin-right post-title">Music + Code:</span>
+      Workshop at Babycastles, New York City.
+      <span class="w3-right post-date w3-hide-small">[11/5/17]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">November 5, 2017</p>
+    <p>
+      Attended an afternoon workshop at Babycastles, a non-profit in NYC that does a lot of work teaching the public about technology and art, and supports local artists who explore this combination, too.
+    </p>
+    <p>
+      The first part covered controlling p5.js sketches with arduino-style hardware. Did you know that Play-Doh is conductive? I didn't, but it sure was fun to use it to make a set of piano keys that played noise when touched. Someone brought up Dan Shiftman's video series <a href="https://youtu.be/6vX8wT1G798">The Nature of Code</a>, which explores programming of natural simulations with Processing. I'd seen some of Shiftman's videos years ago, when I was first learning Processing, so I'm very happy to have this reminder and a recommendation for some more advanced concepts to explore, now that I've learned so much more.
+    </p>
+    <p>
+      The second half of the workshop was a talk by <a href="http://www.martim.xyz">Martim Galvao</a>, a multimedia artist currently persuing PhD in Computer Music and Multimedia at Brown University. I took a lot away from the work he showed and the things he explained, but some books I'm adding to my list are <a href="https://www.ucpress.edu/book.php?isbn=9780520245501">Repeating Ourselves</a> by Robert Fink ("Advertising prepared everyone for minimalist music," he said) and <a href="https://books.google.com/books/about/The_Geometry_of_Musical_Rhythm.html?id=ZlKfh83AJEEC">The Geometry of Musical Rhythm</a> by Godfried T. Toussaint (which discusses <a href="http://www.synthtopia.com/content/2015/11/20/an-introduction-to-euclidean-rhythms/">Euclidean rhythms</a>, among other things). Toussaint also has a <a ref="http://cgm.cs.mcgill.ca/~godfried/publications/banff.pdf">published paper on Euclidean algorithms</a>.
+    </p>
+    <br><br><br>
+
+    <img src="/images/mim.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p>
+      <span class="w3-large w3-margin-right post-title">MIM 2017:</span>
+      NYC's Modular Synthesizer Conference.
+      <span class="w3-right post-date w3-hide-small">[10/15/17]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">October 15, 2017</p>
+    <p>
+      I was lucky enough to attend 2017's Machines in Music Exhibition this past weekend, where I got to see (and get my hands on) some really cool new technology people are working on, including a bunch of experimental modules by the amazing crew at <a href="http://www.bastl-instruments.com/">Bastl Instruments</a> (who also let me take home their 100+ page book of modules and patch techniques they've been playing with) and Critter & Guitari's <a href="https://www.critterandguitari.com/products/etc">ETC video synthesizer</a> (which also lets you program your own visual modes in Python).
+    </p>
+    <p>
+      The lectures were wonderful, too--I think my favorite was about <a href="https://en.wikipedia.org/wiki/David_Tudor">David Tudor</a>, the organist/pianist who worked closesly with John Cage. Tutor later switched to composing and creating hundreds of instruments that he would wire together to create synthesized sound through feedback loops, which is particularly fun when compared to the usual modern methods of additive/subtractive/FM synthesis.
+    </p>
+    <p>
+      Some other highlights of the weekend include attending the release party for <a href="https://detourpgh.bandcamp.com/album/detour006">DETOUR 006</a>. I saw some familiar faces and met some really interesting people, one of whom told me great things about <a href="http://rosenfeldmedia.com/books/the-user-experience-team-of-one/">The User Experience Team of One: A Research and Design Survival Guide</a>. The book had made design intuitive to her, she said, even without a formal design background. I put it on my To Read list right away.
+    </p>
+    <p>
+      I was also fortunate enough to see Tokimonsta at the Brooklyn Electronic Music Festival, and as expected, seeing her play as if she had never had brain surgery was beyond words.
+    </p>
 
     <br>
   </div>
@@ -120,18 +191,20 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </p>
     <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
     <p class="w3-wide">Python</p>
-    <!--div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:95%"></div>
-    </div-->
     <p class="w3-wide">Java</p>
       <p class="sub-p w3-wide">Esp. Processing</p>
     <p class="w3-wide">Javascript</p>
       <p class="sub-p w3-wide">React/Flux, D3, webpack, AngularJS</p>
-      <p class="sub-p w3-wide">(And, of course, <a href='http://vanilla-js.com/'>VanillaJS</a>, the best cross-platform framework of them all)</p>
+      <p class="sub-p w3-wide">(and, of course, <a href='http://vanilla-js.com/'>VanillaJS</a>, the fastest cross-platform framework of them all)</p>
     <p class="w3-wide">Max/MSP</p>
     <p class="w3-wide">puredata</p>
     <p class="w3-wide">Unity</p>
       <p class="sub-p w3-wide">With C#</p>
+    <p class="w3-wide">SML</p>
+    <p class="w3-wide">Arduinos</p>
+          <p class="sub-p w3-wide">With C++</p>
+    <p class="w3-wide">Ask me about low level Turing machines!</p>
+      <p class="sub-p w3-wide">(but where's the market in that...)</p>
     <br>
 
     <!--div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
@@ -230,6 +303,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </div>
   <!-- End Portfolio Section -->
   </div>
+
+  <!-- TODO: add the Your Stats section! -->
 
   <!-- Contact Section -->
   <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
