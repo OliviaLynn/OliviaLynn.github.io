@@ -10,7 +10,6 @@
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
 
-
 <!--link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/-->
 
 <style>
@@ -20,6 +19,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 100px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+ iframe{ border: none; }
 
 .header-space{height:100px;}
 .sub-p {font-size: 13px;padding-left: 20px;}
@@ -31,12 +32,30 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .post-title {font-size: 24px!important;}
 .post-date {padding-top: 8px;padding-bottom: 5px;}
 .post-small-date {text-align: right; color: #555}
+
+.hover-image {
+  filter: grayscale(100%);
+	transition: .3s ease-in-out;
+}
+.hover-image:hover {
+  filter: grayscale(0%);
+}
+.hover-caption {
+  opacity: 0;
+  text-align: center;
+	transition: .1s ease-in-out;
+}
+.hover-container:hover .hover-caption {
+  opacity: 1;
+}
 </style>
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <img src="/images/me4.png" style="width:100%">
+
+  <img src="https://avatars2.githubusercontent.com/u/13068349" width="100px" style="filter:grayscale(100%)">
+  <!--img src="/images/me4.png" style="width:100%"-->
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-home w3-xlarge"></i>
     <p>HOME</p>
@@ -242,10 +261,36 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <br>
 
 
+
   <!-- Portfolio Section -->
   <div class="w3-padding-64 w3-content" id="projects">
     <h2 class="w3-text-light-grey">My Projects</h2>
     <hr style="width:200px" class="w3-opacity">
+
+    <h3 class="w3-padding-24 w3-text-light-grey">Sketches</h3>
+
+
+      <!--iframe src="/test.html" width="482px" height="301px"></iframe-->
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-quarter hover-container">
+          <img class="hover-image" src="/images/greyblue.png" style="width:100%" alt="sketch1">
+          <div class="hover-caption">
+            some text
+          </div>
+        </div>
+        <div class="w3-quarter">
+          <img class="hover-image" src="/images/turquoise.png" style="width:100%" alt="sketch2">
+        </div>
+        <div class="w3-quarter">
+          <img src="/images/green.png" style="width:100%" alt="sketch3">
+        </div>
+        <div class="w3-quarter">
+          <img src="/images/yellow.png" style="width:100%" alt="sketch4">
+        </div>
+    </div>
+
+
+    <h3 class="w3-padding-24 w3-text-light-grey">Other</h3>
 
     <!-- Grid for photos -->
     <div class="w3-row-padding" style="margin:0 -16px">
