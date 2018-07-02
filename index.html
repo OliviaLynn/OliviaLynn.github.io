@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- TODO: add in keywords etc -->
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"-->
+<link rel="stylesheet" href="style.css">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
@@ -15,12 +17,37 @@
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
-.w3-sidebar {width: 100px;background: #222;}
+.w3-sidebar {width: 200px;background: #222;}
 #main {margin-left: 100px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 
  iframe{ border: none; }
+
+  .w3-hide-medium {
+    display : none!important;
+  }
+
+.my-orange {
+  color:#ffd22f;
+}
+.my-navy {
+  color: #212540;
+}
+.my-blue {
+  color: #193982;
+}
+.my-yellow {
+  color: #fffc14;
+}
+.my-turquoise {
+  color: #aaf9fe;
+}
+
+.w3-btn, .w3-button, .w3-sidebar {
+  background-color:  #7db9ff;
+  color: #fff;
+}
 
 .header-space{height:100px;}
 .sub-p {font-size: 13px;padding-left: 20px;}
@@ -48,35 +75,41 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .hover-container:hover .hover-caption {
   opacity: 1;
 }
+
+
+  .w3-col.m3,
+  .w3-quarter {
+    width : 24.99999%;
+  }
 </style>
-<body class="w3-black">
+<body class="w3-white">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
 
-  <img src="https://avatars2.githubusercontent.com/u/13068349" width="100px" style="filter:grayscale(100%)">
-  <!--img src="/images/me4.png" style="width:100%"-->
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <img src="images/me.jpg" width="200px" style="filter:gray scale(100%)">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-home w3-xlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="#news" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#news" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-newspaper w3-xlarge"></i>
     <p>NEWS</p>
   </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-user w3-xlarge"></i>
     <p>ABOUT</p>
   </a>
-  <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-th-list w3-xlarge"></i>
     <p>PROJECTS</p>
   </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-envelope w3-xlarge"></i>
     <p>CONTACT</p>
   </a>
 </nav>
+
 
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
@@ -92,17 +125,17 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+  <header class="w3-container w3-padding-32 w3-center w3-blackNOPE" id="home">
     <div class="header-space"></div>
     <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Olivia Lynn.</h1>
-    <p>Programmer + Artist</p>
+    <p>Machine Learning & Art</p>
     <div class="header-space"></div>
     <!--img src="/images/woods_black.png" alt="header-image" class="w3-image" height="1108"-->
   </header>
 
   <!-- News Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="news">
-    <h3 class="w3-padding-24 w3-text-light-grey">What I've Been Up To</h3>
+    <h3 class="w3-padding-24 w3-text-light-greyNOPE">What I've Been Up To</h3>
 
     <!-- TEMPLATE
       <img src="/images/sq-yellow.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
@@ -118,6 +151,51 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       <br>
       <br>
     -->
+
+    <img src="/images/gamejam.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p class="post-head">
+      <span class="w3-large w3-margin-right post-title">AFTERIMAGE:</span>
+      LFG's 2018 Global Game Jam.
+      <span class="w3-right post-date w3-hide-small">[6/29/18]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">June 29, 2018</p>
+    <p>My friend and I led development for a 2D, arcade-style game called Afterimage at a <a href="https://globalgamejam.org/2016/jam-sites/looking-group-pgh">Game Jam</a>. I hadn't built a game with a team of people in a couple of years and I came out having learned some important things:
+    </ol><li><strong>Pay more attention to your improvement.</strong> I'd hardly touched Unity since 2016, but all the other programming I've done in the meantime must have translated incredibly - I spend the week noticing that things that used to bewilder me felt intuitive and comfortable this time around. It was great.
+    </li><li><strong>Leardership isn't really optional.</strong> The first time I developed a game with a team, I felt shy and timid and not fit to call any of the shots. We had six developers, and I ended up having to pull an all nighter with just one other developer to try to cobble together everyone's half-written code to get the game playable in time for judgement. <br> This time around, I felt far more confident stepping up, making executive decisions, and giving out deadlines to my teammates. We ended up with a much more finished and cohesive game this time around, but we still lacked one person who was calling the shots and keeping tabs on everyone, and our performance in the last couple of days reflected that. It still feels a bit weird to step up to a leadership role in a school of such talented people, but I'm proud of the major improvement I've shown and looking forward to the next game.
+    </li><li><strong>Game Jam + Final Exam = Ow.</strong> Not the best timing. I managed to balance my time really well, but I've enjoyed sleeping so much ever since.</li></ol>
+    </p>
+    <br>
+    <br>
+    <br>
+
+    <img src="/images/rockroom.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p class="post-head">
+      <span class="w3-large w3-margin-right post-title">OBAU:</span>
+      Live Set.
+      <span class="w3-right post-date w3-hide-small">[6/6/18]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">June 6, 2018</p>
+    <p>I played my first live ambient set in a bar in Polish Hill, Pittsburgh. I learned a lot while collecting and preparing samples, and it was also a great push towards having to sit down and understand FM synthesis better. Since then, a couple of friends have lent me both a new controller and really nice VST, so it's exciting to have access to these tools while I work on the areas I want to improve.
+        </p>
+    <br>
+    <br>
+    <br>
+
+    <img src="/images/phipps.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p class="post-head">
+      <span class="w3-large w3-margin-right post-title">SOUNDSCAPE INSTALLATION:</span>
+      Phipps Conservatory and Botanical Gardens.
+      <span class="w3-right post-date w3-hide-small">[4/28/18]</span>
+    </p>
+    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">April 28, 2018</p>
+    <p>A soundscape written in D major and installed on Raspberry Pis hidden among the plants for the entire duration of <a href="
+      https://www.phipps.conservatory.org/calendar/detail/summer-flower-show">Phipps' summer flower show</a>. It was a blast to compose this, especially given such a beautifully designed flower show to host it.
+    </p>
+    <p><em>Phipps Conservatory and Botanical Gardens is a botanical garden set in Schenley Park, Pittsburgh, Pennsylvania, United States. It is a City of Pittsburgh historic landmark and is listed on the National Register of Historic Places. (Thanks, Wikipedia)</em>
+    </p>
+    <br>
+    <br>
+    <br>
 
     <img src="/images/dataviz.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
     <p class="post-head">
@@ -223,9 +301,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </div>
 
   <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <h2 class="w3-text-light-grey">Olivia Lynn</h2>
-    <hr style="width:200px" class="w3-opacity">
+  <div class="w3-content w3-justify w3-text-greyNOPE w3-padding-64" id="about">
+    <h2 class="w3-text-light-greyNOPE">Olivia Lynn</h2>
+    <hr style="width:200px" class="w3-opacityNOPE">
     <p>I study Computer Science and Fine Art at Carnegie Mellon University.</p>
     <p>I love learning new ways math can be used to explain so many beautiful parts of life--and can be used to describe new things, too. These days, I can't stop thinking about sounds: how we can display them visually, how that helps us understand them better, and how that comprehension can lead to new & innovative synthesis.</p>
     <p>Beyond that, I am always interested in both data visualization and medicine/healthcare--how can we standardize EMRs while encouraging competition within the market?
@@ -242,7 +320,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       <span style="font-size:4px">applying our classic modern buzzwords of "big data" </span>
       <span style="font-size:3px">and "machine learning" to genuinely aide new areas of medicine?</span>
     </p>
-    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+    <h3 class="w3-padding-16 w3-text-light-greyNOPE">My Skills</h3>
     <p class="w3-wide">Python</p>
     <p class="w3-wide">Java</p>
       <p class="sub-p w3-wide">Esp. Processing</p>
@@ -264,10 +342,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <!-- Portfolio Section -->
   <div class="w3-padding-64 w3-content" id="projects">
-    <h2 class="w3-text-light-grey">My Projects</h2>
-    <hr style="width:200px" class="w3-opacity">
+    <h2 class="w3-text-light-greyNOPE">My Projects</h2>
+    <hr style="width:200px" class="w3-opacityNOPE">
 
-    <h3 class="w3-padding-24 w3-text-light-grey">Sketches</h3>
+    <h3 class="w3-padding-24 w3-text-light-greyNOPE">Sketches</h3>
 
 
       <!--iframe src="/test.html" width="482px" height="301px"></iframe-->
@@ -290,7 +368,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     </div>
 
 
-    <h3 class="w3-padding-24 w3-text-light-grey">Other</h3>
+    <h3 class="w3-padding-24 w3-text-light-greyNOPE">Other</h3>
 
     <!-- Grid for photos -->
     <div class="w3-row-padding" style="margin:0 -16px">
@@ -312,8 +390,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </div>
 
   <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
+  <div class="w3-padding-64 w3-content w3-text-greyNOPE" id="contact">
+    <h2 class="w3-text-light-greyNOPE">Contact Me</h2>
     <hr style="width:200px" class="w3-opacity">
 
     <div class="w3-section">
