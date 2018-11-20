@@ -1,546 +1,250 @@
 <!DOCTYPE html>
 <html>
-<title>Olivia Lynn</title>
+<title>O. LYNN</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- TODO: add in keywords etc -->
-
-<!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"-->
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-
-<!--link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/-->
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-.w3-sidebar {width: 180px;background: #222;}
-#main {margin-left: 100px}
-/* Remove margins from "page content" on small screens */
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
 
- iframe{ border: none; }
+.w3-flat-turquoise {color:#fff;background-color:#1abc9c}
+.w3-flat-emerald {color:#fff;background-color:#2ecc71}
+.w3-flat-peter-river {color:#fff;background-color:#3498db}
+.w3-flat-amethyst {color:#fff;background-color:#9b59b6}
+.w3-flat-wet-asphalt {color:#fff;background-color:#34495e}
+.w3-flat-green-sea {color:#fff;background-color:#16a085}
+.w3-flat-nephritis {color:#fff;background-color:#27ae60}
+.w3-flat-belize-hole {color:#fff;background-color:#2980b9}
+.w3-flat-wisteria {color:#fff;background-color:#8e44ad}
+.w3-flat-midnight-blue {color:#fff;background-color:#2c3e50}
+.w3-flat-sun-flower {color:#fff;background-color:#f1c40f}
+.w3-flat-carrot {color:#fff;background-color:#e67e22}
+.w3-flat-alizariin {color:#fff;background-color:#e74c3c}
+.w3-flat-clouds {color:#000;background-color:#ecf0f1}
+.w3-flat-concrete {color:#fff;background-color:#95a5a6}
+.w3-flat-orange {color:#fff;background-color:#f39c12}
+.w3-flat-pumpkin {color:#fff;background-color:#d35400}
+.w3-flat-pomegranate {color:#fff;background-color:#c0392b}
+.w3-flat-silver {color:#000;background-color:#bdc3c7}
+.w3-flat-asbestos {color:#fff;background-color:#7f8c8d}
 
-  .w3-hide-medium {
-    display : none!important;
-  }
-
-.my-orange {
-  color:#ffd22f;
-}
-.my-navy {
-  color: #212540;
-}
-.my-blue {
-  color: #193982;
-}
-.my-yellow {
-  color: #fffc14;
-}
-.my-turquoise {
-  color: #aaf9fe;
-}
-
-.w3-btn, .w3-button, .w3-sidebar {
-  background-color:  #7db9ff;
-  color: #fff;
-}
-
-.header-space{height:100px;}
-.sub-p {font-size: 13px;padding-left: 20px;}
-.nav-text{font-size: 10px;}
-
-.post-p {padding-left: 100px;}
-.post-ul {padding-left: 140px;}
-.post-head {}
-.post-title {font-size: 24px!important;}
-.post-date {padding-top: 8px;padding-bottom: 5px;}
-.post-small-date {text-align: right; color: #555}
-
-.hover-image {
-  filter: grayscale(100%);
-	transition: .3s ease-in-out;
-}
-.hover-image:hover {
-  filter: grayscale(0%);
-}
-.hover-caption {
-  opacity: 0;
-  text-align: center;
-	transition: .1s ease-in-out;
-}
-.hover-container:hover .hover-caption {
-  opacity: 1;
-}
-
-
-  .w3-col.m3,
-  .w3-quarter {
-    width : 24.99999%;
-  }
-
-  [type="checkbox"] {
-  position: absolute;
-  left: -9999px;
-}
-
-label {
-  margin-left: 55px;
-}
-label:before {
-  content: '(See More)';
-  font-style: italic;
-  left: 10px;
-}
-
-[type="checkbox"] ~ div {
-  display: none;
-}
-[type="checkbox"]:checked ~ div {
-  display: block;
-}
-ul.show-more {
-
-  list-style-type: none;
-}
-
+.w3-text-asbestos,.w3-hover-text-asbestos:hover{color:#7f8c8d!important}
 </style>
-<body class="w3-white">
+<body>
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-
-  <img src="images/me.jpg" width="180px" style="filter:gray scale(100%)">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
-    <i class="fa fa-home w3-xlarge"></i>
-    <p>HOME</p>
-  </a>
-  <a href="#news" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
-    <i class="fa fa-newspaper w3-xlarge"></i>
-    <p>NEWS</p>
-  </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
-    <i class="fa fa-user w3-xlarge"></i>
-    <p>ABOUT</p>
-  </a>
-  <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
-    <i class="fa fa-th-list w3-xlarge"></i>
-    <p>PROJECTS</p>
-  </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
-    <i class="fa fa-envelope w3-xlarge"></i>
-    <p>CONTACT</p>
-  </a>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-flat-asbestos w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>Olivia<br>Lynn</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
+    <a href="#Works" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Works</a>
+    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Services</a>
+    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Designers</a>
+    <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Packages</a>
+    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
+  </div>
 </nav>
 
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-flat-asbestos w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-flat-asbestos w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Olivia Lynn</span>
+</header>
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="nav-text w3-bar-item w3-button" style="width:20% !important">HOME</a>
-    <a href="#news" class="nav-text w3-bar-item w3-button" style="width:20% !important">NEWS</a>
-    <a href="#about" class="nav-text w3-bar-item w3-button" style="width:20% !important">ABOUT</a>
-    <a href="#projects" class="nav-text w3-bar-item w3-button" style="width:20% !important">PROJECTS</a>
-    <a href="#contact" class="nav-text w3-bar-item w3-button" style="width:20% !important">CONTACT</a>
-  </div>
-</div>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-blackNOPE" id="home">
-    <div class="header-space"></div>
-    <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Olivia Lynn.</h1>
-    <p>Machine Learning & Art</p>
-    <div class="header-space"></div>
-    <!--img src="/images/woods_black.png" alt="header-image" class="w3-image" height="1108"-->
-  </header>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-  <!-- News Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="news">
-    <h3 class="w3-padding-24 w3-text-light-greyNOPE">What I've Been Up To</h3>
-
-    <!-- TEMPLATE
-      <img src="/images/sq-yellow.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-      <p class="post-head">
-        <span class="w3-large w3-margin-right post-title">TITLE:</span>
-        Subtitle.
-        <span class="w3-right post-date w3-hide-small">[date]</span>
-      </p>
-      <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">small date</p>
-      <p>
-      </p>
-      <br>
-      <br>
-      <br>
-
-
-                <ul class="show-more">
-                  <li class="show-more-container">
-                    <input type="checkbox" id="check_id">
-                    <label for="check_id"></label>
-                    <div>hmm</div>
-                  </li>
-                </ul>
-    -->
-
-
-
-    <img src="/images/gamejam.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">AFTERIMAGE:</span>
-      LFG's 2018 Global Game Jam.
-      <span class="w3-right post-date w3-hide-small">[6/29/18]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">June 29, 2018</p>
-    <p>My friend and I led development for a 2D, arcade-style game called Afterimage at a <a href="https://globalgamejam.org/2016/jam-sites/looking-group-pgh">Game Jam</a>. I hadn't built a game with a team of people in a couple of years and I came out having learned some important things:
-</p>
-
-          <ul class="show-more">
-            <li class="show-more-container">
-              <input type="checkbox" id="gamejam">
-              <label for="gamejam"></label>
-              <div>
-<br>
-    <ol><li><strong>Pay more attention to your improvement.</strong> I'd hardly touched Unity since 2016, but all the other programming I've done in the meantime must have translated incredibly - I spend the week noticing that things that used to bewilder me felt intuitive and comfortable this time around. It was great.
-    </li><li><strong>Leardership isn't really optional.</strong> The first time I developed a game with a team, I felt shy and timid and not fit to call any of the shots. We had six developers, and I ended up having to pull an all nighter with just one other developer to try to cobble together everyone's half-written code to get the game playable in time for judgement. <br> This time around, I felt far more confident stepping up, making executive decisions, and giving out deadlines to my teammates. We ended up with a much more finished and cohesive game this time around, but we still lacked one person who was calling the shots and keeping tabs on everyone, and our performance in the last couple of days reflected that. It still feels a bit weird to step up to a leadership role in a school of such talented people, but I'm proud of the major improvement I've shown and looking forward to the next game.
-    </li><li><strong>Game Jam + Final Exam = Ow.</strong> Not the best timing. I managed to balance my time really well, but I've enjoyed sleeping so much ever since.</li></ol>
-
-                  </div>
-                </li>
-              </ul>
-
-    <br>
-    <br>
-    <br>
-
-    <img src="/images/rockroom.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">OBAU:</span>
-      Live Set.
-      <span class="w3-right post-date w3-hide-small">[6/6/18]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">June 6, 2018</p>
-    <p>I played my first live ambient set in a bar in Polish Hill, Pittsburgh. I learned a lot while collecting and preparing samples, and it was also a great push towards having to sit down and understand FM synthesis better. Since then, a couple of friends have lent me both a new controller and really nice VST, so it's exciting to have access to these tools while I work on the areas I want to improve.
-        </p>
-    <br>
-    <br>
-    <br>
-
-    <img src="/images/phipps.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">SOUNDSCAPE INSTALLATION:</span>
-      Phipps Conservatory and Botanical Gardens.
-      <span class="w3-right post-date w3-hide-small">[4/28/18]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">April 28, 2018</p>
-    <p>A soundscape written in D major and installed on Raspberry Pis hidden among the plants for the entire duration of <a href="
-      https://www.phipps.conservatory.org/calendar/detail/summer-flower-show">Phipps' summer flower show</a>. It was a blast to compose this, especially given such a beautifully designed flower show to host it.
-    </p>
-    <p><em>Phipps Conservatory and Botanical Gardens is a botanical garden set in Schenley Park, Pittsburgh, Pennsylvania, United States. It is a City of Pittsburgh historic landmark and is listed on the National Register of Historic Places. (Thanks, Wikipedia)</em>
-    </p>
-    <br>
-    <br>
-    <br>
-
-    <img src="/images/dataviz.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">Data Visualization:</span>
-      Emma Slayton at Sorrel's Library.
-      <span class="w3-right post-date w3-hide-small">[2/13/18]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">February 13, 2018</p>
-    <p>
-      This was a brief talk given by <a href="https://www.library.cmu.edu/about/people/emma-slayton">Emma Slayton</a>, CLIR Fellow for Data Visualization at CMU.
-    </p>
-    <p>
-      Unfortunately, I had to run out of a little bit early because I had a class lecture, but it was great to review some classic data visualization concepts and history. I also learned new things, too, so all in all I'd call it a success. Some highlights include:
-    </p>
-
-
-
-      <ul class="show-more">
-        <li class="show-more-container">
-          <input type="checkbox" id="dataviz">
-          <label for="dataviz"></label>
-          <div>
-          <br>
-
-
-    <ul>
-      <li>Hans Rosling apparently gave a lot of <a href="https://www.ted.com/speakers/hans_rosling">TED Talks</a>. I remember--years ago--stumbling upon some version of his classic <a href="https://www.gapminder.org/tools/#_chart-type=bubbles">bubble chart</a> that shows all sorts of trends demographic data, like per-country income vs life expectancy. It's good to have a name to attach to the chart, and to know there's a larger body of work to follow up on.</li>
-      <li>
-        There's a site <a href="http://www.visualisingdata.com/">visualizingdata.com</a>. Of course, I guess. Glad to have it brought to my attention, there are some great resources there.
-      </li>
-      <li><a href="https://visual.ly/community/infographic/how/graphic-continuum?utm_source=visually_embed">The Graph Continuum</a>, a handy chart mapping the relationships between different types of graphs. It's both pretty and useful for organizing different options, and helpful for remembering the graphs you see less commonly still exist.</li>
-      <li class="w3-hide-small">
-        This helpful chart:
-        <br>
-        <div style="display: inline-block; margin-left: 25%; margin-right: 25%">
-          <img src="https://pbs.twimg.com/media/C8hNXQhXYAEplAe.jpg" alt="pie-chart" style="width:500px; opacity:0.8">
-        </div>
-      </li>
-    </ul>
-
-                  </div>
-                </li>
-              </ul>
-
-
-
-
-
-
-    <br>
-    <br>
-    <br>
-
-    <img src="/images/gene-kogan.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">Gene Kogan:</span>
-      Machine Learning & Art Lecture.
-      <span class="w3-right post-date w3-hide-small">[2/11/18]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">February 11, 2018</p>
-    <p class="">
-      It was fantastic to attend <a href="http://genekogan.com">Gene Kogan's</a> talk on Monday at CMU. He's a programmer and self-taught artist, who--for lack of better succinct wording--makes some really cool things and knows a bunch of other people who make cool things, too.
-    </p>
-
-
-
-      <ul class="show-more">
-        <li class="show-more-container">
-          <input type="checkbox" id="genekogan">
-          <label for="genekogan"></label>
-          <div>
-          <br>
-
-
-
-    <p class="">
-      I have a <a href="http://bit.ly/notes-gene-kogan">3-page Google doc</a> full of people, projects, and tools he mentioned that I'm really excited to check out, but some of the highlights were:
-    </p>
-    <ul class="">
-      <li>
-        Kogan's made musical instruments with <a href="http://www.scattershot.org/bio.htm">Jeff Snyder</a>, the current Director of Electronic Music at Princeton University (you know, if creating a <a href="https://www.snyderphonics.com/JD-1_reference_manual.pdf">specialty controller</a> that was <a href="https://www.snyderphonics.com/about.htm">commisioned by Buchla</a> weren't impressive enough).
-      </li>
-      <li>
-        Snyder's research makes me want to curl up with some hot chocolate on a Sunday afternoon and read about cutting edge digital lutherie, and can be viewed <a href="https://www.researchgate.net/profile/Jeff_Snyder6">here</a> and <a href="http://www.scattershot.org/research.htm">here</a>.
-      </li>
-      <li>
-        He mentioned <a href="http://quasimondo.com/">Mario Klingemann</a>, or Quasimondo, an artist in residence at Google Arts & Culture. Some of his pieces include <a href="http://underdestruction.com/2016/02/25/ernst/">generative collages</a> in the style of Ernst, though I think I like his work with generative adversarial networks (GANs) the most--<a href="http://underdestruction.com/2017/02/04/alternative-face/">controlling a person's face and their expressions</a> and a spooky music video that <a href="http://underdestruction.com/2017/07/23/freeda-beast-bringing-things-to-an-end/">interpolates between different faces</a>.
-      </li>
-      <li>
-        His project <a href="http://ml4a.github.io/">ml4a</a>, a compilation of guides and demos that teach machine learning for artists (or anyone, really). Just wow.
-      </li>
-    </ul>
-
-
-
-                  </div>
-                </li>
-              </ul>
-
-
-    <br>
-    <br>
-    <br>
-
-    <img src="/images/babycastles1.png" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p class="post-head">
-      <span class="w3-large w3-margin-right post-title">Music + Code:</span>
-      Workshop at Babycastles, New York City.
-      <span class="w3-right post-date w3-hide-small">[11/5/17]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">November 5, 2017</p>
-    <p>
-      Attended an afternoon workshop at Babycastles, a non-profit in NYC that does a lot of work teaching the public about technology and art, and supports local artists who explore this combination, too.
-    </p>
-
-
-
-      <ul class="show-more">
-        <li class="show-more-container">
-          <input type="checkbox" id="babycastles">
-          <label for="babycastles"></label>
-          <div>
-          <br>
-
-
-    <p>
-      The first part covered controlling p5.js sketches with arduino-style hardware. Did you know that Play-Doh is conductive? I didn't, but it sure was fun to use it to make a set of piano keys that played noise when touched. Someone brought up Dan Shiftman's video series <a href="https://youtu.be/6vX8wT1G798">The Nature of Code</a>, which explores programming of natural simulations with Processing. I'd seen some of Shiftman's videos years ago, when I was first learning Processing, so I'm very happy to have this reminder and a recommendation for some more advanced concepts to explore, now that I've learned so much more.
-    </p>
-    <p>
-      The second half of the workshop was a talk by <a href="http://www.martim.xyz">Martim Galvao</a>, a multimedia artist currently persuing PhD in Computer Music and Multimedia at Brown University. I took a lot away from the work he showed and the things he explained, but some books I'm adding to my list are <a href="https://www.ucpress.edu/book.php?isbn=9780520245501">Repeating Ourselves</a> by Robert Fink ("Advertising prepared everyone for minimalist music," he said) and <a href="https://books.google.com/books/about/The_Geometry_of_Musical_Rhythm.html?id=ZlKfh83AJEEC">The Geometry of Musical Rhythm</a> by Godfried T. Toussaint (which discusses <a href="http://www.synthtopia.com/content/2015/11/20/an-introduction-to-euclidean-rhythms/">Euclidean rhythms</a>, among other things). Toussaint also has a <a ref="http://cgm.cs.mcgill.ca/~godfried/publications/banff.pdf">published paper on Euclidean algorithms</a>.
-    </p>
-
-  </div>
-</li>
-</ul>
-
-
-
-    <br><br><br>
-
-
-
-
-    <img src="/images/mim.jpg" alt="post-image" class="w3-left w3-circle w3-margin-right" style="width:80px">
-    <p>
-      <span class="w3-large w3-margin-right post-title">MIM 2017:</span>
-      NYC's Modular Synthesizer Conference.
-      <span class="w3-right post-date w3-hide-small">[10/15/17]</span>
-    </p>
-    <p class="post-small-date w3-hide-big w3-hide-large w3-hide-medium">October 15, 2017</p>
-    <p>
-      I was lucky enough to attend 2017's Machines in Music Exhibition this past weekend, where I got to see (and get my hands on) some really cool new technology people are working on, including a bunch of experimental modules by the amazing crew at <a href="http://www.bastl-instruments.com/">Bastl Instruments</a> (who also let me take home their 100+ page book of modules and patch techniques they've been playing with) and Critter & Guitari's <a href="https://www.critterandguitari.com/products/etc">ETC video synthesizer</a> (which also lets you program your own visual modes in Python).
-    </p>
-
-
-      <ul class="show-more">
-        <li class="show-more-container">
-          <input type="checkbox" id="mim2017">
-          <label for="mim2017"></label>
-          <div>
-          <br>
-
-    <p>
-      The lectures were wonderful, too--I think my favorite was about <a href="https://en.wikipedia.org/wiki/David_Tudor">David Tudor</a>, the organist/pianist who worked closesly with John Cage. Tutor later switched to composing and creating hundreds of instruments that he would wire together to create synthesized sound through feedback loops, which is particularly fun when compared to the usual modern methods of additive/subtractive/FM synthesis.
-    </p>
-    <p>
-      Some other highlights of the weekend include attending the release party for <a href="https://detourpgh.bandcamp.com/album/detour006">DETOUR 006</a>. I saw some familiar faces and met some really interesting people, one of whom told me great things about <a href="http://rosenfeldmedia.com/books/the-user-experience-team-of-one/">The User Experience Team of One: A Research and Design Survival Guide</a>. The book had made design intuitive to her, she said, even without a formal design background. I put it on my To Read list right away.
-    </p>
-    <p>
-      I was also fortunate enough to see Tokimonsta at the Brooklyn Electronic Music Festival, and as expected, seeing her play as if she had never had brain surgery was beyond words.
-    </p>
-
-
-  </div>
-</li>
-</ul>
-
-
-    <br>
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="Works">
+    <h1 class="w3-jumbo"><b>O. LYNN</b></h1>
+    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Works.</b></h1>
+    <hr style="width:50px;border:5px solid #7f8c8d" class="w3-round">
   </div>
 
-  <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-greyNOPE w3-padding-64" id="about">
-    <h2 class="w3-text-light-greyNOPE">Olivia Lynn</h2>
-    <hr style="width:200px" class="w3-opacityNOPE">
-    <p>I study Computer Science and Fine Art at Carnegie Mellon University.</p>
-    <p>I love learning new ways math can be used to explain so many beautiful parts of life--and can be used to describe new things, too. These days, I can't stop thinking about sounds: how we can display them visually, how that helps us understand them better, and how that comprehension can lead to new & innovative synthesis.</p>
-    <p>Beyond that, I am always interested in both data visualization and medicine/healthcare--how can we standardize EMRs while encouraging competition within the market?
-      <span style="font-size:14px">Can we find better ways to open access to research and facilitate</span>
-      <span style="font-size:13px">communication among scientists, without bypassing publishers and </span>
-      <span style="font-size:12px">forcing researchers to foot the cost associated with peer-reviewing </span>
-      <span style="font-size:11px">and typesetting findings? Are there ways to further develop </span>
-      <span style="font-size:10px">bundle payments or explore new payment plans to make care more </span>
-      <span style="font-size:9px">affordable while improving hospital margins? Can we develop a site, </span>
-      <span style="font-size:8px">app, periodical, or some sort of platform to compile indormation on </span>
-      <span style="font-size:7px">different medical conditions and lifestyle choices empirically proven to help, </span>
-      <span style="font-size:6px">to reach patients that might not have the time or ability to read articles </span>
-      <span style="font-size:5px">and studies on their own? And of course, how can we continue </span>
-      <span style="font-size:4px">applying our classic modern buzzwords of "big data" </span>
-      <span style="font-size:3px">and "machine learning" to genuinely aide new areas of medicine?</span>
-    </p>
-    <h3 class="w3-padding-16 w3-text-light-greyNOPE">My Skills</h3>
-    <p class="w3-wide">Python</p>
-    <p class="w3-wide">Java</p>
-      <p class="sub-p w3-wide">Esp. Processing</p>
-    <p class="w3-wide">Javascript</p>
-      <p class="sub-p w3-wide">React/Flux, D3, webpack, AngularJS</p>
-      <p class="sub-p w3-wide">(and, of course, <a href='http://vanilla-js.com/'>VanillaJS</a>, the fastest cross-platform framework of them all)</p>
-    <p class="w3-wide">Max/MSP</p>
-    <p class="w3-wide">puredata</p>
-    <p class="w3-wide">Unity</p>
-      <p class="sub-p w3-wide">With C#</p>
-    <p class="w3-wide">SML</p>
-    <p class="w3-wide">Arduinos</p>
-          <p class="sub-p w3-wide">With C++</p>
-    <p class="w3-wide">Ask me about low level Turing machines!</p>
-      <p class="sub-p w3-wide">(but where's the market in that...)</p>
-    <br>
-
-
-
-  <!-- Portfolio Section -->
-  <div class="w3-padding-64 w3-content" id="projects">
-    <h2 class="w3-text-light-greyNOPE">My Projects</h2>
-    <hr style="width:200px" class="w3-opacityNOPE">
-
-    <h3 class="w3-padding-24 w3-text-light-greyNOPE">Sketches</h3>
-
-
-      <!--iframe src="/test.html" width="482px" height="301px"></iframe-->
-    <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-quarter hover-container">
-          <img class="hover-image" src="/images/greyblue.png" style="width:100%" alt="sketch1">
-          <div class="hover-caption">
-            some text
-          </div>
-        </div>
-        <div class="w3-quarter">
-          <img class="hover-image" src="/images/turquoise.png" style="width:100%" alt="sketch2">
-        </div>
-        <div class="w3-quarter">
-          <img src="/images/green.png" style="width:100%" alt="sketch3">
-        </div>
-        <div class="w3-quarter">
-          <img src="/images/yellow.png" style="width:100%" alt="sketch4">
-        </div>
+  <!-- Photo grid (modal) -->
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <img src="/images/shadersketch0.gif" style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">
+      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
+      <img src="/images/yellow.png" style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">
     </div>
 
-
-    <h3 class="w3-padding-24 w3-text-light-greyNOPE">Other</h3>
-
-    <!-- Grid for photos -->
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half">
-        <img src="/images/green.png" style="width:100%">
-        <img src="/images/greyblue.png" style="width:100%">
-        <!--img src="/images/yellow.png" style="width:100%"-->
-      </div>
-
-      <div class="w3-half">
-        <img src="/images/turquoise.png" style="width:100%">
-        <img src="/images/yellow.png" style="width:100%">
-        <!--img src="/images/green.png" style="width:100%">
-        <img src="/images/greyblue.png" style="width:100%"-->
-      </div>
-    <!-- End photo grid -->
+    <div class="w3-half">
+      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">
+      <img src="/images/yellow.png" style="width:100%" onclick="onClick(this)" alt="Bedroom and office in one space">
+      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Scandinavian design">
     </div>
-  <!-- End Portfolio Section -->
   </div>
 
-  <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-greyNOPE" id="contact">
-    <h2 class="w3-text-light-greyNOPE">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
-
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Pittsburgh, US</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: (203) 554-5085</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: olynn@andrew.cmu.edu</p>
-    </div><br>
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
   </div>
 
-    <!-- Footer -->
-  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-    <!--i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i-->
-    <p class="w3-medium w3-center">Site built by Olivia Lynn. Check out my <a href="https://github.com/OliviaLynn" target="_blank" class="w3-text-green">Github</a> and heckle my spagetti code.</p>
-  <!-- End footer -->
-  </footer>
+  <!-- Services -->
+  <div class="w3-container" id="services" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Services.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>We are a O. LYNN service that focus on what's best for your home and what's best for you!</p>
+    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
 
-<!-- END PAGE CONTENT -->
+  <!-- Designers -->
+  <div class="w3-container" id="designers" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Designers.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>The best team in the world.</p>
+    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <p><b>Our designers are thoughtfully chosen</b>:</p>
+  </div>
+
+  <!-- The Team -->
+  <div class="w3-row-padding w3-grayscale">
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="/w3images/team2.jpg" alt="John" style="width:100%">
+        <div class="w3-container">
+          <h3>John Doe</h3>
+          <p class="w3-opacity">CEO & Founder</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+        <div class="w3-container">
+          <h3>Jane Doe</h3>
+          <p class="w3-opacity">Designer</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
+        <div class="w3-container">
+          <h3>Mike Ross</h3>
+          <p class="w3-opacity">Architect</p>
+          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packages / Pricing Tables -->
+  <div class="w3-container" id="packages" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Packages.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
+  </div>
+
+  <div class="w3-row-padding">
+    <div class="w3-half w3-margin-bottom">
+      <ul class="w3-ul w3-light-grey w3-center">
+        <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+        <li class="w3-padding-16">Floorplanning</li>
+        <li class="w3-padding-16">10 hours support</li>
+        <li class="w3-padding-16">Photography</li>
+        <li class="w3-padding-16">20% furniture discount</li>
+        <li class="w3-padding-16">Good deals</li>
+        <li class="w3-padding-16">
+          <h2>$ 199</h2>
+          <span class="w3-opacity">per room</span>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="w3-half">
+      <ul class="w3-ul w3-light-grey w3-center">
+        <li class="w3-flat-asbestos w3-xlarge w3-padding-32">Pro</li>
+        <li class="w3-padding-16">Floorplanning</li>
+        <li class="w3-padding-16">50 hours support</li>
+        <li class="w3-padding-16">Photography</li>
+        <li class="w3-padding-16">50% furniture discount</li>
+        <li class="w3-padding-16">GREAT deals</li>
+        <li class="w3-padding-16">
+          <h2>$ 249</h2>
+          <span class="w3-opacity">per room</span>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button class="w3-button w3-flat-asbestos w3-padding-large w3-hover-black">Sign Up</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="w3-container" id="contact" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Contact.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
+    <form action="/action_page.php" target="_blank">
+      <div class="w3-section">
+        <label>Name</label>
+        <input class="w3-input w3-border" type="text" name="Name" required>
+      </div>
+      <div class="w3-section">
+        <label>Email</label>
+        <input class="w3-input w3-border" type="text" name="Email" required>
+      </div>
+      <div class="w3-section">
+        <label>Message</label>
+        <input class="w3-input w3-border" type="text" name="Message" required>
+      </div>
+      <button type="submit" class="w3-button w3-block w3-padding-large w3-flat-asbestos w3-margin-bottom">Send Message</button>
+    </form>
+  </div>
+
+<!-- End page content -->
 </div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
 
 </body>
 </html>
