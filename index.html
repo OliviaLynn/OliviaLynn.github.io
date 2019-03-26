@@ -1,250 +1,534 @@
-<!DOCTYPE html>
 <html>
-<title>O. LYNN</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1}
 
-.w3-flat-turquoise {color:#fff;background-color:#1abc9c}
-.w3-flat-emerald {color:#fff;background-color:#2ecc71}
-.w3-flat-peter-river {color:#fff;background-color:#3498db}
-.w3-flat-amethyst {color:#fff;background-color:#9b59b6}
-.w3-flat-wet-asphalt {color:#fff;background-color:#34495e}
-.w3-flat-green-sea {color:#fff;background-color:#16a085}
-.w3-flat-nephritis {color:#fff;background-color:#27ae60}
-.w3-flat-belize-hole {color:#fff;background-color:#2980b9}
-.w3-flat-wisteria {color:#fff;background-color:#8e44ad}
-.w3-flat-midnight-blue {color:#fff;background-color:#2c3e50}
-.w3-flat-sun-flower {color:#fff;background-color:#f1c40f}
-.w3-flat-carrot {color:#fff;background-color:#e67e22}
-.w3-flat-alizariin {color:#fff;background-color:#e74c3c}
-.w3-flat-clouds {color:#000;background-color:#ecf0f1}
-.w3-flat-concrete {color:#fff;background-color:#95a5a6}
-.w3-flat-orange {color:#fff;background-color:#f39c12}
-.w3-flat-pumpkin {color:#fff;background-color:#d35400}
-.w3-flat-pomegranate {color:#fff;background-color:#c0392b}
-.w3-flat-silver {color:#000;background-color:#bdc3c7}
-.w3-flat-asbestos {color:#fff;background-color:#7f8c8d}
+<head>
+<title>Canvas Artificial Life Evolution Simulation</title>
 
-.w3-text-asbestos,.w3-hover-text-asbestos:hover{color:#7f8c8d!important}
+<script src="../include/npgmain.js"></script>
+<script src="../include/vector2D.js"></script>
+<style type="text/css">
+    canvas {
+        border: 1px solid #555;
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+    }
+
+    h2 {
+        font-weight: normal;
+        font-size: 12px;
+
+    }
+
+    body {
+        text-align: center;
+        font-family: Verdana, Helvetica, sans-serif;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+
+    .ex {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .slidercc {
+        width: 610px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .slidercR, .slidercL {
+        padding-top: 6px;
+        width: 49%;
+        display: inline-block;
+    }
+    .slidercR {
+        margin-left: auto;
+    }
+    .slidercL {
+        margin-right: auto;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      border: 1px solid black;
+      background: #fff;
+      outline: none;
+        margin: 0px;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 40px;
+      height: 15px;
+      background: #000;
+      cursor: pointer;
+      opacity: 0.5
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 15px;
+      background: #000;
+      cursor: pointer;
+    }
 </style>
-<body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-flat-asbestos w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-  <div class="w3-container">
-    <h3 class="w3-padding-64"><b>Olivia<br>Lynn</b></h3>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
-    <a href="#Works" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Works</a>
-    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Services</a>
-    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Designers</a>
-    <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Packages</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contact</a>
-  </div>
-</nav>
+</head>
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-flat-asbestos w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-flat-asbestos w3-margin-right" onclick="w3_open()">☰</a>
-  <span>Olivia Lynn</span>
-</header>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
-
-  <!-- Header -->
-  <div class="w3-container" style="margin-top:80px" id="Works">
-    <h1 class="w3-jumbo"><b>O. LYNN</b></h1>
-    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Works.</b></h1>
-    <hr style="width:50px;border:5px solid #7f8c8d" class="w3-round">
-  </div>
-
-  <!-- Photo grid (modal) -->
-  <div class="w3-row-padding">
-    <div class="w3-half">
-      <img src="/images/shadersketch0.gif" style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">
-      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
-      <img src="/images/yellow.png" style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">
-    </div>
-
-    <div class="w3-half">
-      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">
-      <img src="/images/yellow.png" style="width:100%" onclick="onClick(this)" alt="Bedroom and office in one space">
-      <img src="/images/turquoise.png" style="width:100%" onclick="onClick(this)" alt="Scandinavian design">
-    </div>
-  </div>
-
-  <!-- Modal for full size images on click-->
-  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
-    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-      <img id="img01" class="w3-image">
-      <p id="caption"></p>
-    </div>
-  </div>
-
-  <!-- Services -->
-  <div class="w3-container" id="services" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Services.</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>We are a O. LYNN service that focus on what's best for your home and what's best for you!</p>
-    <p>Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-  </div>
-
-  <!-- Designers -->
-  <div class="w3-container" id="designers" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Designers.</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>The best team in the world.</p>
-    <p>We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-    <p><b>Our designers are thoughtfully chosen</b>:</p>
-  </div>
-
-  <!-- The Team -->
-  <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-        <div class="w3-container">
-          <h3>John Doe</h3>
-          <p class="w3-opacity">CEO & Founder</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+<body onLoad="NPGinit(50);">
+    <div class="slidercc">
+        <div class="slidercL">
+            <span >Food Scarcity: </span><span id="foodaddfreq_t">16</span><br />
+            <input type="range" min="1" max="30" value="16" class="slider" id="foodaddfreq_s">
+            <span >Replication Threshold: </span><span id="repthr_t">4</span><br />
+            <input type="range" min="1" max="16" value="4" class="slider" id="repthr_s">
         </div>
-      </div>
-    </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-        <div class="w3-container">
-          <h3>Jane Doe</h3>
-          <p class="w3-opacity">Designer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+
+        <div class="slidercR">
+            <span >Food Loss (per tick): </span><span id="foodloss_t">0.00005</span><br />
+            <input type="range" min="0.00001" max="0.0004" step="0.00001" value="0.00005" class="slider" id="foodloss_s">
+            
+            <span >Food Gain: </span><span id="foodgain_t">0.8</span><br />
+            <input type="range" min="0.05" max="1.0" step="0.01" value="0.8" class="slider" id="foodgain_s">
         </div>
-      </div>
     </div>
-    <div class="w3-col m4 w3-margin-bottom">
-      <div class="w3-light-grey">
-        <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-        <div class="w3-container">
-          <h3>Mike Ross</h3>
-          <p class="w3-opacity">Architect</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    <canvas id="NPGcanvas" width="600" height="600">Browser not supported for Canvas. Get a real browser.</canvas>
+    <br />
+    <canvas id="NPGcanvas2" width="600" height="120"></canvas>
+</body>
 
-  <!-- Packages / Pricing Tables -->
-  <div class="w3-container" id="packages" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Packages.</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
-  </div>
+<script type="text/javascript">
+    
+    var agents = [];
+    var food = [];
 
-  <div class="w3-row-padding">
-    <div class="w3-half w3-margin-bottom">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">10 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">20% furniture discount</li>
-        <li class="w3-padding-16">Good deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 199</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
+    var minAgents = 6;
+    var mutrate= 0.2; //how common are mutations
+    var mutrate2= 0.4;//0.3; //how severe are mutations
+    
+    var rad= 12;//15; //radius of agents
+    var eyesep= 0.8;//0.6; //eye seperation in radians
+    var eyelen= 20;//30; //pixels btwn eye and body
+    var eyesens= 0.00001; //decrease for more sensitivity
+    var eyemult= 0.5; //linear multiplier on eye strength
+    
+   var params = {
+       repthr: 6,
+       foodloss: 0.003,
+       foodgain: 0.3,
+       foodaddfreq: 2,
+       foodmove: 1
+   }
+    var foodRad = 6;
+    var foodloss= 0.003;//0.002 //food loss per iteration
+    var repthr= 8;//3; //replication threshold? in amt food
+    var foodlimit= 200;//70; //how much food can there be total?
+    var boostcost=0.001;  //how much does use of boost cost in health
+    var foodloss_s = document.getElementById("foodloss_s");
+    var foodloss_t = document.getElementById("foodloss_t");
+    var rt_s = document.getElementById("repthr_s");
+    var rt_t = document.getElementById("repthr_t");
+    var foodaddfreq = 60;
 
-    <div class="w3-half">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-flat-asbestos w3-xlarge w3-padding-32">Pro</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">50 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">50% furniture discount</li>
-        <li class="w3-padding-16">GREAT deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 249</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-flat-asbestos w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-  </div>
+    function linkSlider(id_s, id_t, obj, attr) {
+        if (id_s != null) {
+            id_s.oninput = function() { 
+                console.log(obj[attr]);
+                obj[attr] = this.value;
+                console.log(obj[attr]); 
+                if (id_t != null) id_t.innerHTML = this.value;
+            }
+        }
+    }
+    linkSlider(rt_s, rt_t, params, "repthr");
+    linkSlider(foodloss_s, foodloss_t, params, "foodloss");
+    linkSlider(foodgain_s, foodgain_t, params, "foodgain");
+    linkSlider(foodaddfreq_s, foodaddfreq_t, params, "foodaddfreq");
+    
+    var brainsize = 20; //how many neurons does each brain have. Must be bigger than about 10
+    var braindensity = 3; //how dense are the brains? (number of synapses per neuron)
 
-  <!-- Contact -->
-  <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-asbestos"><b>Contact.</b></h1>
-    <hr style="width:50px;border:5px solid red" class="w3-round">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
-    <form action="/action_page.php" target="_blank">
-      <div class="w3-section">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Name" required>
-      </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-section">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Message" required>
-      </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-flat-asbestos w3-margin-bottom">Send Message</button>
-    </form>
-  </div>
+    
+    canvas2 = document.getElementById('NPGcanvas2');
+    ctx2 = canvas2.getContext('2d');
+    
+    
+    function Brain() {
 
-<!-- End page content -->
-</div>
+        //1D array of neuron activations
+        this.act = new Array(brainsize);
+        for (var i = 0; i < brainsize; i++) {
+            this.act[i] = 0;
+        }
 
-<!-- W3.CSS Container -->
-<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+        // These are 2D arrays
+        // [2, 4, 2]
+        // [4, 2, 1]
+        // [0, 1, 3]
+        // [2, 3, 1]
+        // [4, 0, 2]
+        // B-size       # rows      how many layers         (-1.2, 1.2)
+        // B-ensity     # cols      how many units/layer    (0, brainsize)
+        //2D array of synapse weights and indexes of neurons they connect to
+        this.w = new Array(brainsize);
+        this.ix = new Array(brainsize);
+        for (var i = 0; i < brainsize; i++) {
+            this.w[i] = new Array(braindensity);
+            this.ix[i] = new Array(braindensity);
+            for (var j = 0; j < braindensity; j++) {
+                this.w[i][j] = randf(-1.2, 1.2);
+                this.ix[i][j] = randi(0, brainsize);
+            }
+        }
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
+    }
 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
+    //feeds forward the brain. s1 and s2 are the two senses, both in [0,1]
+    //health is ... health
+    Brain.prototype = {
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
+        //brain takes inputs and sets its outputs
+        tick: function(s1, s2) {
+
+            this.act[0] = s1; //set inputs
+            this.act[1] = s2;
+            this.act[3] = 1; //some bias neurons are always on
+            this.act[4] = 1;
+            this.act[5] = 1;
+            this.act[6] = 1;
+
+            for (var i = 7; i < brainsize; i++) { //rn that's 7 to 20
+                var a = 0;
+                for (var j = 0; j < braindensity; j++) {
+                    a += this.w[i][j] * this.act[this.ix[i][j]]
+                }
+                // this.act[7 to (brainsize-1)]
+                // = all weights in that layer times the activation of some hidden layer
+                //     (this layer was randomly decided at init, same each time per unit)
+                this.act[i] = 1.0 / (1.0 + Math.exp(-a)); //pass through sigmoid
+            }
+
+            //assume last 2 neurons are the outputs
+            return {
+                out0: this.act[brainsize - 1] - 0.5, // Turn amount
+                out1: this.act[brainsize - 2] // 
+            };
+        },
+
+        //used during reproduction
+        //copy over the brain with some mutation. crude. for now
+        mutateFrom: function(brain) {
+            var amt = 0;
+            //lossy copy of brain structure
+            for (var i = 0; i < brainsize; i++) {
+                for (var j = 0; j < braindensity; j++) {
+
+                    var m = brain.w[i][j];
+                    if (randf(0, 1) < mutrate) {
+                        m += randn(0, mutrate2);
+                        amt += 1;
+                    }
+                    this.w[i][j] = m;
+
+                    m = brain.ix[i][j];
+                    if (randf(0, 1) < mutrate) {
+                        m = randi(0, brainsize);
+                        amt += 1;
+                    }
+                    this.ix[i][j] = m;
+                }
+            }
+            //console.log(amt);
+            return amt;
+        }
+    }
+
+    function Agent() {
+        this.pos = new Vector2D(randf(0, WIDTH), randf(0, HEIGHT));
+        this.dir = randf(0, 2 * Math.PI);
+        this.s1 = 0; //food sense eye 1
+        this.s2 = 0; //food sense eye 2
+        this.brain = new Brain();
+        this.speed = 4.0;
+        this.boost = 0.0; //boost, on top of speed
+        this.health = 1.0;
+        this.rep = 0.0; //replication counter
+        this.selected = false;
+        this.hue = Math.round(255.0 * Math.random());
+    }
+
+    function myinit() {
+        counter = 0;
+
+        //cosmetics
+        ctx.font = "12pt Arial";
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = "1.5";
+    }
+
+    function update() {
+        counter = counter + 1;
+
+        killi = -1;
+        for (i in agents) {
+            var a = agents[i];
+
+            //move agent
+            var vel = new Vector2D((a.boost + a.speed) * Math.cos(a.dir), (a.boost + a.speed) * Math.sin(a.dir));
+            a.pos.plusEq(vel);
+
+            //enforce boundary conditions: wrap around if necessary
+            if (a.pos.x < 0) a.pos.x = WIDTH;
+            if (a.pos.x > WIDTH) a.pos.x = 0;
+            if (a.pos.y < 0) a.pos.y = HEIGHT;
+            if (a.pos.y > HEIGHT) a.pos.y = 0;
+
+            //agent gets more hungry
+            a.health -= params.foodloss;
+            a.health -= boostcost * a.boost; //boost costs health
+            if (a.health < 0) {
+                killi = i;
+            }
+        }
+        if (killi != -1) agents.splice(killi, 1);
+
+        //agent collision detection and resolution
+        for (i in agents) {
+            var a = agents[i];
+            for (j in agents) {
+                var a2 = agents[j];
+                if (i == j) continue;
+                var d = Math.sqrt(Math.pow(a.pos.x - a2.pos.x, 2) + Math.pow(a.pos.y - a2.pos.y, 2));
+                var overlap = rad * 2 - d;
+                if (overlap > 0 && d > 1) {
+                    //one agent pushes on another proportional to their boost. Higher boost wins
+                    var aggression = a2.boost / (a.boost + a2.boost);
+                    if (a.boost < 0.01 && a2.boost < 0.01) aggression = 0.5;
+                    var ff2 = (overlap * aggression) / d;
+                    var ff1 = (overlap * (1 - aggression)) / d;
+                    a2.pos.x += (a2.pos.x - a.pos.x) * ff2;
+                    a2.pos.y += (a2.pos.y - a.pos.y) * ff2;
+                    a.pos.x -= (a2.pos.x - a.pos.x) * ff1;
+                    a.pos.y -= (a2.pos.x - a.pos.x) * ff1;
+                }
+            }
+        }
+
+        //check if any agent ate food
+        //and while we're at it, compute input to sense
+        killi = -1;
+        for (i in agents) {
+            var a = agents[i];
+            a.s1 = 0;
+            a.s2 = 0;
+
+            for (j in food) {
+                var f = food[j];
+
+                var d2 = Math.sqrt(Math.pow(a.pos.x - f.pos.x, 2) + Math.pow(a.pos.y - f.pos.y, 2));
+                if (d2 < rad + foodRad) {
+                    a.rep += parseFloat(params.foodgain);
+                    a.health += parseFloat(params.foodgain);
+                    if (a.health > 1) a.health = 1;
+                    killi = j;
+                }
+
+                if (d2 < rad * 10) { //for efficiency, don't even bother if it's too far
+
+                    //compute position of both eyes in world coordinates
+                    var x1 = a.pos.x + eyelen * Math.cos(a.dir - eyesep);
+                    var y1 = a.pos.y + eyelen * Math.sin(a.dir - eyesep);
+                    var x2 = a.pos.x + eyelen * Math.cos(a.dir + eyesep);
+                    var y2 = a.pos.y + eyelen * Math.sin(a.dir + eyesep);
+
+                    a.s1 += eyemult * Math.exp(-eyesens * (Math.pow(x1 - f.pos.x, 2) + Math.pow(y1 - f.pos.y, 2)));
+                    a.s2 += eyemult * Math.exp(-eyesens * (Math.pow(x2 - f.pos.x, 2) + Math.pow(y2 - f.pos.y, 2)));
+                }
+            }
+        }
+        if (killi != -1) food.splice(killi, 1);
+
+        //feed forward the brain from senses to output
+        for (i in agents) {
+            var a = agents[i];
+            res = a.brain.tick(a.s1, a.s2);
+
+            //apply output neuron 0: controls turning. Also cap it to a max of 0.3 rotation
+            var des = res.out0;
+            if (des > 0.8) des = 0.8;
+            if (des < -0.8) des = -0.8;
+            a.dir += des;
+
+            //wrap direction around to keep it in range of [0, 2pi]
+            if (a.dir > 2 * Math.PI) a.dir = a.dir - 2 * Math.PI;
+            if (a.dir < 0) a.dir = 2 * Math.PI + a.dir;
+
+            //apply output neuron 1: controls boost
+            des = res.out1;
+            if (des > 0) {
+                a.boost = des;
+            } else {
+                a.boost = 0;
+            }
+        }
+
+        var interval = 60*100 * params.foodmove;
+        //spawn more food, maybe
+        if ((counter % params.foodaddfreq == 0) && food.length < foodlimit) {
+            var dt = new Date();
+            var seconds = dt.getTime() % interval;
+            var posy = seconds*(HEIGHT/interval);
+            var f = {                
+                pos: new Vector2D(randf(0, WIDTH), posy)
+            };
+            food.push(f);
+        }
+
+        //handle births
+        var bi = -1;
+        for (i in agents) {
+            var a = agents[i];
+            if (a.rep > params.repthr) {
+                //this agent reproduces!
+                bi = i;
+            }
+        }
+
+        if (bi != -1) {
+            var a = agents[bi];
+            a.rep = 0;
+
+            var anew = new Agent();
+            anew.pos = new Vector2D(a.pos.x + randf(-30, 30), a.pos.y + randf(-30, 30));
+            var mutAmt = anew.brain.mutateFrom(a.brain);
+            expectedMutation = 2 * mutrate * braindensity * brainsize;
+            if (mutAmt < expectedMutation) {
+                var hueAdd = 0;
+            }
+            else {
+                var hueAdd = Math.pow(mutAmt - expectedMutation, 2);
+            }            
+            anew.hue = (a.hue + hueAdd) % 360;
+
+            agents.push(anew);
+        }
+
+        //spawn more agents if there are too few agents left
+        if (agents.length < minAgents) {
+            var anew = new Agent();
+            agents.push(anew);
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        ctx2.clearRect(0,0,600,120);
+        //draw food
+        ctx.fillStyle = 'rgb(100,230,100)';
+        for (i in food) {
+            var f = food[i];
+            drawCircle(f.pos.x, f.pos.y, foodRad);
+        }
+
+        //draw all agents
+        for (i in agents) {
+            var a = agents[i];
+
+            ctx.save();
+            ctx.translate(a.pos.x, a.pos.y);
+            ctx.rotate(a.dir - Math.PI / 2);
+
+            //draw its eyes
+            //first compute their position
+            var a1 = -eyesep + Math.PI / 2;
+            var a2 = eyesep + Math.PI / 2;
+            var x1 = Math.cos(a1) * eyelen;
+            var y1 = Math.sin(a1) * eyelen;
+            var x2 = Math.cos(a2) * eyelen;
+            var y2 = Math.sin(a2) * eyelen;
+
+            //draw the eyes, colored by how much food they sense
+            var eyeRad = 3;
+            var s = Math.round(a.s1 * 255.0);
+            ctx.fillStyle = 'rgb(' + s + ',0,0)';
+            drawCircle(x1, y1, eyeRad);
+            var s = Math.round(a.s2 * 255.0);
+            if (s > 255) s = 255;
+            ctx.fillStyle = 'rgb(' + s + ',0,0)';
+            drawCircle(x2, y2, eyeRad);
+
+            //draw agent body and outline
+            if (!a.selected) {
+                ctx.fillStyle = 'hsl(' + a.hue + ', ' + (Math.round(75.0 * a.health)) + '%, 60%)';
+            } else {
+                ctx.fillStyle = '#000000';
+            }
+            drawCircle(0, 0, rad);
+            ctx.restore();
+
+            //draw brains
+            var hght = 6;
+            var wdth = 12;
+            var mgn = 0;
+            ctx.strokeStyle = "rgba(0, 0, 0, 0)";
+            ctx2.strokeStyle = "rgba(0, 0, 0, 0)";
+            for (var j = 0; j < a.brain.act.length; j++) {
+                var act_j = a.brain.act[j];
+                ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*70) + '%,'+Math.round(100*a.health)+'%)';
+                ctx2.beginPath();
+                ctx2.rect(i*wdth, j*hght, wdth-mgn, hght);
+                ctx2.closePath();
+                ctx2.fill();
+                
+            }
+            
+        }
+
+        //draw score
+        //ctx.fillStyle = 'rgb(0,0,0)';
+        //ctx.fillText("Alive: " + agents.length, 10, 20); 
+    }
+
+    function mouseClick(x, y) {
+        console.log(params);
+        
+        //select an agent with mouseclick
+        
+        var i;
+        for (i in agents) {
+            var a = agents[i];
+            var d = Math.sqrt(Math.pow(a.pos.x - x, 2) + Math.pow(a.pos.y - y, 2));
+            if (d < 8 * rad) { //was 3
+
+                //that's a hit! Let's select this one and unselect all others
+                var newset = !a.selected;
+                var j;
+                for (j in agents) {
+                    agents[j].selected = false;
+                }
+                a.selected = newset;
+                console.log("Selected:");
+                console.log(a);               
+
+                return;
+            }
+        }
+        
+    }
+
+    function keyUp(key) {}
+
+    function keyDown(key) {}
+
 </script>
 
-</body>
 </html>
