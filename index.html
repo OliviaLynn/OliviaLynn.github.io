@@ -1,416 +1,283 @@
 <html>
 
 <head>
-<title>Canvas Artificial Life Evolution Simulation</title>
+    <title>O.LYNN</title>
 
-<script src="include/npgmain.js"></script>
-<script src="include/vector2D.js"></script>
-<style type="text/css">
-    canvas {
-        border: 1px solid #555;
-        margin-top: 10px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    <script src="FitterCritter/include/npgmain.js"></script>
+    <script src="FitterCritter/include/vector2D.js"></script>
+    <script src="FitterCritter/include/evolution.js"></script>
 
-    h1 {
-        font-weight: normal;
-        font-size: 26px;
-        text-align: center;
-    }
+    <style type="text/css">
+        body {
+            width: 700px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            font-family: Helvetica, sans-serif;
+            color: #444;
+        }
 
-    h2 {
-        font-weight: normal;
-        font-size: 22px;
-        text-align: center;
-    }
-    h3 {
-        font-weight: normal;
-        font-size: 16px;
-    }
+        p {
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
 
-    body {
-        text-align: left;
-        font-family: Verdana, Helvetica, sans-serif;
-        font-size: 14px;
-        padding-top: 10px;
-    }
-    
-    em {
-        font-style: normal;
-        text-decoration: underline;
-    }
-    
-    .center {
-        width: 750px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .slidercc {
-        width: 750px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .slidercR, .slidercL {
-        padding-top: 6px;
-        width: 49.5%;
-        display: inline-block;
-    }
-    .slidercR {
-        margin-left: auto;
-    }
-    .slidercL {
-        margin-right: auto;
-    }
+        }
 
-    .slider {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 25px;
-      border: 1px solid black;
-      background: #fff;
-      outline: none;
-      margin: 4px 0px 10px 0px;
-    }
+        a {
+            color: hsl(220, 25%, 60%);
+        }
 
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 40px;
-      height: 25px;
-      background: #000;
-      cursor: pointer;
-      opacity: 0.5
-    }
+        ul {
+            list-style-type: square;
+            list-style-position: inside;  
+            padding-inline-start: 0px;
+        }
+        li {
+            margin-bottom: 15px;
+            margin-left: -15px;
+        }
 
-    .slider::-moz-range-thumb {
-      width: 25px;
-      height: 25px;
-      background: #000;
-      cursor: pointer;
-    }
-</style>
+        canvas {
+            border: 1px solid #555;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
+        h1 {
+            font-weight: normal;
+            font-size: 36px;
+        }
+
+        h2 {
+            font-weight: normal;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        em {
+            font-style: normal;
+            text-decoration: underline;
+        }
+
+        .disclaimer {
+            color: #666;
+            font-size: 12px;
+            margin-top: -10px;
+            font-style: italic;
+            line-height: 16px;
+        }
+
+        .center {
+            width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 
 <body onLoad="NPGinit(50);">
-    <div class="center">
-        <h1>F I T T E R &#183; C R I T T E R</h1>
-    </div>
-    <div class="slidercc">
-        <div class="slidercL">
-            <span >Food Refresh Slowness: </span><span id="foodaddfreq_t"></span><br />
-            <input type="range" min="1" max="30" value="9" class="slider" id="foodaddfreq_s">
-            <span >Replication Threshold: </span><span id="repthr_t"></span><br />
-            <input type="range" min="1" max="20" value="13" class="slider" id="repthr_s">
-        </div>
 
-        <div class="slidercR">
-            <span >Food Loss (per tick): </span><span id="foodloss_t"></span><br />
-            <input type="range" min="0.00001" max="0.003" step="0.00001" value="0.00209" class="slider" id="foodloss_s">
-            
-            <span >Food Gain: </span><span id="foodgain_t"></span><br />
-            <input type="range" min="0.05" max="2.25" step="0.05" value="0.9" class="slider" id="foodgain_s">
-        </div>
-    </div>
-    <canvas id="NPGcanvas" width="750" height="400">Browser not supported for Canvas. Get a real browser.</canvas>
+    <h1>OLIVIA LYNN</h1>
+    <p>I develop <span class="hue1">games</span>, <span class="hue1">data viz</span>, <span class="hue1">mobile apps</span>, and <span class="hue1">websites</span>.</p>
     <br />
-    <canvas id="NPGcanvas2" width="750" height="120"></canvas>
-    <div class="center">
-        <br />
-        <h2>THE SITUATION</h2>
-        <h3>CRITTERS</h3>
-        <p>Each critter is controlled by a neural network, which has both inputs and outputs:</p>
-        <p>INPUTS: each of the critter's eyes, which sense how much food is within the range of their sight.</p>
-        <p> OUTPUTS: how much the critter should turn &#183; how much boost the critter should use. </p>
-        <p>Each critter's neural network is weighted differently from the others, so we can think of each critter's neural network as its own personal genome.</p>
-        <br />
-        <h3>FOOD</h3>
-        <p>Food is placed at a rate based on the 'Food scarcity' slider.</p>
-        <p>A critter that doesn't eat enough will starve to death.</p>
-        <p>A critter that does eat enough will become ready to reproduce, which occurs asexually (single-parent).</p>
-        <br />
-        <h3>REPRODUCING</h3>
-        <p>The new offspring will be a nearly indentical copy of its parent--plus some amount of mutations.</p>
-        <p>These mutations to the critter's neural netork might make an offspring fitter and better at finding food.</p> 
-        <p>Alternatively, they might make the offspring unable to survive.</p>
-        <p>Unfit critters will starve to death, rather than producing new offspring to carry their genes.</p>
-        <p>This cycle of life and death allows the critters to evolve to become better and better at finding food.</p>
-        <br />
-        <h3>COLOR</h3>
-        <p>Evolution can be roughly followed by the hue of a critter.</p>
-        <p>For example, offspring that is nearly identical to its blue parent will also be a similar shade of blue, while heavily mutated offspring will be placed further on the color wheel, as some shade of purple.</p>
-        <br />
-        <h3>LOWER PANEL</h3>
-        <p>The lower panel displays the neural networks of the currently active critters.</p>
-        <p>Each column is a single critter.</p>
-        <p>The top two cells in a column are the two inputs: the left and right eyes.</p>
-        <p>Next is the rest of the neural network layers, including a few constant bias terms at the top.</p>
-        <p>The bottom two cells are the two outputs: turn amount and boost.</p>
-        <br />
-        <h3>YOUR ROLE</h3>
-        <p>Sliders must be adjusted to allow critters to thrive.</p>
-        <p>Too much food (or food that is too powerful) combined with a low reproduction threshold will cause sudden, exponential population growth. This naturally causes a scarcity of food, followed by inevitable mass starvation.</p>
-        <p>On the other hand, harsh conditions with little food will result in critters that struggle to simply stay alive, and they will never get the chance to reproduce.</p>
-        <p>While randomly generated critters will be placed on screen if the population drops to a certain point, these new critters are not chosen based on fitness, and the population will not be evolving.</p>
-        <p>Can you create the fittest critter?</p>
-        <br /><br /><br /><br />
-    </div>
+    <p>Lately I've been spending time on:
+        <ul>
+            <li>Coded-from-scratch <br /><span class="hue2">machine learning</span> models
+            <li>More <span class="hue2">Android</span> app development</li>
+            <li>GLSL <span class="hue2">Shaders</span></li>
+        </ul>
+    </p>
+    <br />
+    <p>Check out my <a href="https://www.linkedin.com/in/olivia-lynn/">Linkedin</a> and <a href="https://github.com/oliviaLynn">Github</a>.</p>
+    <p class="disclaimer">(Small disclaimer - I don't use my Github much these days<br />due to of academic integrity, Unity's own version control, etc.)</p>
+    <br /><br />
+    <h2>FITTER &#183; CRITTER</h2>
+    <p class="disclaimer">A (tiny) peak of <a href="olivialynn.github.io/critter">my current side project</a>.</p>
+    <canvas id="NPGcanvas" width="400" height="300">Browser not supported for Canvas.</canvas>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 </body>
-
 <script type="text/javascript">
-    
     var agents = [];
     var food = [];
 
-    var minAgents = 3;
-    var mutrate= 0.2; //how common are mutations
-    var mutrate2= 0.4;//0.3; //how severe are mutations
+    var rad = 12;
+    var eyesep = 0.6;
+    var eyelen = 25;
+    var eyesens = 0.0005;
+    var eyemult = 0.5;
+
+    var foodaddfreq = 31;
+    var foodmove = 0.2;
+    var foodRad = 5;
+    var foodlimit = 20;
+
+    var boostcost = 0.001;
+
+    var hiddenLayers = 20;
+    var hiddenUnitsPerLayer = 3;
+    var mutrate= 0.2;
+    var mutrate2= 0.4;
+
+
+    canvas = document.getElementById('NPGcanvas');
+    ctx = canvas.getContext('2d');
+    var sampleAgent = new Agent();
+    sampleAgent.pos.x = 100;
+    sampleAgent.pos.y = 100;
     
-    var rad= 15;//15; //radius of agents
-    var eyesep= 0.6;//0.6; //eye seperation in radians
-    var eyelen= 30;//30; //pixels btwn eye and body
-    var eyesens= 0.0005;//0.00005 //decrease for more sensitivity
-    var eyemult= 0.5;//0.5; //linear multiplier on eye strength
+sampleAgent.brain.act = [0.10887418593459602,0.05474511369325997,0,1,1,1,1,0.421159879299083,0.7548588463966104,0.3858638709763918,0.32612580981800593,0.18348835976487826,0.456655244297069,0.5736818402000642,0.47395459228312664,0.6659513013921142,0.24926610094493645,0.5453273895759873,0.44873357567385624,0.41930912040553137];
+sampleAgent.brain.w = [[0.9298457285540269,1.0217751886359827,1.1284671385426295],[-0.09065456284088136,0.2404156119136326,-2.3612349232387824],[0.7352546412651835,0.26159472203613565,-0.13356914298674183],[1.3640648996240357,-0.5865428886775244,-0.9547967052101658],[-1.34489130277464,1.3152210895640766,2.155621929008327],[-0.4996378435221782,0.21859346597691523,-0.38216851234706184],[-1.0600797457946842,0.4432685334424711,-0.3370524927606642],[0.002796034285437843,-0.3921524160955936,-0.5943317126921821],[-0.29586687494732933,0.5658395007286088,1.0208454476468123],[-0.5955786378161215,-1.0260401611859764,0.5019261316017376],[-0.6798252544308713,-0.11631018847289232,-0.4983169691365379],[-0.0818484340426846,-1.0002676924451401,-0.8403849844481672],[-0.3595514021093913,0.2225385547355074,0.5262737344340607],[1.5497530920210072,-0.4958779527401205,0.3153903493889474],[0.13073679136824246,0.376523194482715,-0.6611459850708472],[0.37552051571766243,-0.46633133744138383,0.706227885248738],[-1.0519261788958374,1.1411152651479415,-0.6714942193663116],[-0.06436703127514176,-0.0470374114873362,0.33735343406932683],[-1.6230861887605847,0.5633484775413384,-1.0776083314796818],[1.1885614552613315,0.7418201079629061,-1.05210839415972]];
+    sampleAgent.brain.ix = [[9,0,3],[3,19,7],[6,0,18],[10,16,10],[6,0,19],[17,17,1],[7,13,18],[19,7,16],[2,11,5],[1,7,2],[13,19,13],[7,3,17],[8,18,2],[10,15,9],[3,17,15],[17,14,5],[6,0,16],[2,16,13],[1,15,12],[0,2,19]];
     
-   var params = {
-       repthr: 6,
-       foodloss: 0.003,
-       foodgain: 0.3,
-       foodaddfreq: 2,
-       foodmove: 0.2
-   }
-    var foodRad = 6;
-    var foodloss= 0.003;//0.002 //food loss per iteration
-    var repthr= 8;//3; //replication threshold? in amt food
-    var foodlimit= 50;//70; //how much food can there be total?
-    var boostcost=0.001;  //how much does use of boost cost in health
-    var foodloss_s = document.getElementById("foodloss_s");
-    var foodloss_t = document.getElementById("foodloss_t");
-    var rt_s = document.getElementById("repthr_s");
-    var rt_t = document.getElementById("repthr_t");
-    var foodaddfreq = 60;
-
-    function linkSlider(id_s, id_t, obj, attr) {
-        if (id_s != null) {
-            id_s.oninput = function() { 
-                console.log(obj[attr]);
-                obj[attr] = this.value;
-                console.log(obj[attr]); 
-                if (id_t != null) id_t.innerHTML = this.value;
-            }
-        }
-    }
-    linkSlider(rt_s, rt_t, params, "repthr");
-    linkSlider(foodloss_s, foodloss_t, params, "foodloss");
-    linkSlider(foodgain_s, foodgain_t, params, "foodgain");
-    linkSlider(foodaddfreq_s, foodaddfreq_t, params, "foodaddfreq");
-    
-    var brainsize = 20; //how many neurons does each brain have. Must be bigger than about 10
-    var braindensity = 3; //how dense are the brains? (number of synapses per neuron)
-
-    
-    canvas2 = document.getElementById('NPGcanvas2');
-    ctx2 = canvas2.getContext('2d');
-    
-    
-    function Brain() {
-
-        //1D array of neuron activations
-        this.act = new Array(brainsize);
-        for (var i = 0; i < brainsize; i++) {
-            this.act[i] = 0;
-        }
-
-        // These are 2D arrays
-        // [2, 4, 2]
-        // [4, 2, 1]
-        // [0, 1, 3]
-        // [2, 3, 1]
-        // [4, 0, 2]
-        // B-size       # rows      how many layers         (-1.2, 1.2)
-        // B-ensity     # cols      how many units/layer    (0, brainsize)
-        //2D array of synapse weights and indexes of neurons they connect to
-        this.w = new Array(brainsize);
-        this.ix = new Array(brainsize);
-        for (var i = 0; i < brainsize; i++) {
-            this.w[i] = new Array(braindensity);
-            this.ix[i] = new Array(braindensity);
-            for (var j = 0; j < braindensity; j++) {
-                this.w[i][j] = randf(-1.2, 1.2);
-                this.ix[i][j] = randi(0, brainsize);
-            }
-        }
-
-    }
-
-    //feeds forward the brain. s1 and s2 are the two senses, both in [0,1]
-    //health is ... health
-    Brain.prototype = {
-
-        //brain takes inputs and sets its outputs
-        tick: function(s1, s2) {
-
-            this.act[0] = s1; //set inputs
-            this.act[1] = s2;
-            this.act[3] = 1; //some bias neurons are always on
-            this.act[4] = 1;
-            this.act[5] = 1;
-            this.act[6] = 1;
-
-            for (var i = 7; i < brainsize; i++) { //rn that's 7 to 20
-                var a = 0;
-                for (var j = 0; j < braindensity; j++) {
-                    a += this.w[i][j] * this.act[this.ix[i][j]]
-                }
-                // this.act[7 to (brainsize-1)]
-                // = all weights in that layer times the activation of some hidden layer
-                //     (this layer was randomly decided at init, same each time per unit)
-                this.act[i] = 1.0 / (1.0 + Math.exp(-a)); //pass through sigmoid
-            }
-
-            //assume last 2 neurons are the outputs
-            return {
-                out0: -(this.act[brainsize - 1] - 0.5), // Turn amount
-                out1: this.act[brainsize - 2] // 
-            };
-        },
-
-        //used during reproduction
-        //copy over the brain with some mutation. crude. for now
-        mutateFrom: function(brain) {
-            var amt = 0;
-            //lossy copy of brain structure
-            for (var i = 0; i < brainsize; i++) {
-                for (var j = 0; j < braindensity; j++) {
-
-                    var m = brain.w[i][j];
-                    if (randf(0, 1) < mutrate) {
-                        m += randn(0, mutrate2);
-                        amt += 1;
-                    }
-                    this.w[i][j] = m;
-
-                    m = brain.ix[i][j];
-                    if (randf(0, 1) < mutrate) {
-                        m = randi(0, brainsize);
-                        amt += 1;
-                    }
-                    this.ix[i][j] = m;
-                }
-            }
-            //console.log(amt);
-            return amt;
-        }
-    }
-
-    function Agent() {
-        this.pos = new Vector2D(randf(0, WIDTH), randf(0, HEIGHT));
-        this.dir = randf(0, 2 * Math.PI);
-        this.s1 = 0; //food sense eye 1
-        this.s2 = 0; //food sense eye 2
-        this.brain = new Brain();
-        this.speed = 4.0;
-        this.boost = 0.0; //boost, on top of speed
-        this.health = 1.0;
-        this.rep = 0.0; //replication counter
-        this.selected = false;
-        this.hue = Math.round(255.0 * Math.random());
-    }
 
     function myinit() {
         counter = 0;
-
-        //cosmetics
+        ctx.strokeStyle = "rgba(0, 0, 0, 0)";
         ctx.font = "12pt Arial";
-        ctx.strokeStyle = "black";
         ctx.lineWidth = "1";
+
+        agents.push(sampleAgent);
+        var a = sampleAgent;
+        a.rep = 0;
+
+        var anew = new Agent();
+        anew.pos = new Vector2D(a.pos.x + randf(-30, 30), a.pos.y + randf(-30, 30));
+        var mutAmt = anew.brain.mutateFrom(a.brain);
+        var hueAdd = Math.pow(mutAmt, 2);
+        anew.hue = (a.hue + hueAdd) % 360;
+        agents.push(anew);
+        
+        var clr1 = "hsl(" + a.hue +", 85%, 35%)";
+        var clr2 = "hsl(" + anew.hue + ", 85%, 35%)";
+        var elemsClr1 = document.getElementsByClassName('hue1');
+        for (var i = 0; i < elemsClr1.length; i++) {
+            var elem = elemsClr1[i];
+            console.log(elem);
+            if (elem != undefined) {
+                elem.style.color = clr1;
+            }
+        }
+        var elemsClr2 = document.getElementsByClassName('hue2');
+        for (var i = 0; i < elemsClr2.length; i++) {
+            var elem = elemsClr2[i];
+            console.log(elem);
+            if (elem != undefined) {
+                elem.style.color = clr2;
+            }
+        }
     }
 
     function update() {
         counter = counter + 1;
 
-        killi = -1;
+        // Move
         for (i in agents) {
             var a = agents[i];
-
-            //move agent
-            var vel = new Vector2D((a.boost + a.speed) * Math.cos(a.dir), (a.boost + a.speed) * Math.sin(a.dir));
-            a.pos.plusEq(vel);
-
-            //enforce boundary conditions: wrap around if necessary
-            if (a.pos.x < 0) a.pos.x = WIDTH;
-            if (a.pos.x > WIDTH) a.pos.x = 0;
-            if (a.pos.y < 0) a.pos.y = HEIGHT;
-            if (a.pos.y > HEIGHT) a.pos.y = 0;
-
-            //agent gets more hungry
-            a.health -= params.foodloss;
-            a.health -= boostcost * a.boost; //boost costs health
-            if (a.health < 0) {
-                killi = i;
-            }
-        }
-        if (killi != -1) agents.splice(killi, 1);
-
-        //agent collision detection and resolution
-        for (i in agents) {
-            var a = agents[i];
-            for (j in agents) {
-                var a2 = agents[j];
-                if (i == j) continue;
-                var d = Math.sqrt(Math.pow(a.pos.x - a2.pos.x, 2) + Math.pow(a.pos.y - a2.pos.y, 2));
-                var overlap = rad * 2 - d;
-                if (overlap > 0 && d > 1) {
-                    //one agent pushes on another proportional to their boost. Higher boost wins
-                    var aggression = a2.boost / (a.boost + a2.boost);
-                    if (a.boost < 0.01 && a2.boost < 0.01) aggression = 0.5;
-                    var ff2 = (overlap * aggression) / d;
-                    var ff1 = (overlap * (1 - aggression)) / d;
-                    a2.pos.x += (a2.pos.x - a.pos.x) * ff2;
-                    a2.pos.y += (a2.pos.y - a.pos.y) * ff2;
-                    a.pos.x -= (a2.pos.x - a.pos.x) * ff1;
-                    a.pos.y -= (a2.pos.x - a.pos.x) * ff1;
-                }
-            }
+            moveAgent(a);
         }
 
+        // Now that we've moved, check for collisions
+        //handleAgentCollision();
+
+        // Eat food and calculate eye sense
+        eatAndComputeInputs();
+        
+        feedForwardAgents();
+        spawnFoodMaybe();
+    }
+
+    function spawnFoodMaybe() {
+        var interval = 60 * 100 * foodmove;
+        //spawn more food, maybe
+        if ((counter % foodaddfreq == 0) && food.length < foodlimit) {
+            var dt = new Date();
+            var seconds = dt.getTime() % interval;
+            var posy = seconds * (HEIGHT / interval);
+            var f = {
+                pos: new Vector2D(randf(0, WIDTH), posy)
+            };
+            food.push(f);
+        }
+
+    }
+
+    function eatAndComputeInputs() {
         //check if any agent ate food
         //and while we're at it, compute input to sense
         killi = -1;
         for (i in agents) {
+
+            // Inputs
             var a = agents[i];
             a.s1 = 0;
             a.s2 = 0;
 
             for (j in food) {
                 var f = food[j];
+                var distAgent2Food = eucDistFromPos(a.pos, f.pos);
 
-                var d2 = Math.sqrt(Math.pow(a.pos.x - f.pos.x, 2) + Math.pow(a.pos.y - f.pos.y, 2));
-                if (d2 < rad + foodRad) {
-                    a.rep += parseFloat(params.foodgain);
-                    a.health += parseFloat(params.foodgain);
-                    if (a.health > 1) a.health = 1;
+                // Eat available food
+                if (distAgent2Food < rad + foodRad) {
                     killi = j;
                 }
 
-                if (d2 < rad * 10) { //for efficiency, don't even bother if it's too far
-
-                    //compute position of both eyes in world coordinates
-                    var x1 = a.pos.x + eyelen * Math.cos(a.dir - eyesep);
-                    var y1 = a.pos.y + eyelen * Math.sin(a.dir - eyesep);
-                    var x2 = a.pos.x + eyelen * Math.cos(a.dir + eyesep);
-                    var y2 = a.pos.y + eyelen * Math.sin(a.dir + eyesep);
-
-                    a.s1 += eyemult * Math.exp(-eyesens * (Math.pow(x1 - f.pos.x, 2) + Math.pow(y1 - f.pos.y, 2)));
-                    a.s2 += eyemult * Math.exp(-eyesens * (Math.pow(x2 - f.pos.x, 2) + Math.pow(y2 - f.pos.y, 2)));
+                // Sense nearby food
+                if (distAgent2Food < rad * 10) {
+                    eyes = getEyePos(a);
+                    a.s1 += eyeSense(eyes.L, f);
+                    a.s2 += eyeSense(eyes.R, f);
                 }
             }
         }
         if (killi != -1) food.splice(killi, 1);
+    }
 
+    function eucDistFromPos(a, b) {
+        return Math.sqrt(Math.pow(a.x - b.x, 2) +
+            Math.pow(a.y - b.y, 2));
+    }
+
+    function getEyePos(agent) {
+        // right and left might be flipped, this was arbitrary
+        // and i haven't bothered checking since the names are only
+        // for readability
+        left = {
+            x: 0,
+            y: 0
+        };
+        left.x = agent.pos.x + eyelen * Math.cos(agent.dir - eyesep);
+        left.y = agent.pos.y + eyelen * Math.sin(agent.dir - eyesep);
+        right = {
+            x: 0,
+            y: 0
+        };
+        right.x = agent.pos.x + eyelen * Math.cos(agent.dir + eyesep);
+        right.y = agent.pos.y + eyelen * Math.sin(agent.dir + eyesep);
+        return {
+            L: left,
+            R: right
+        }
+    }
+
+    function eyeSense(eye, food) {
+        return eyemult * Math.exp(-eyesens * (Math.pow(eye.x - food.pos.x, 2) +
+            Math.pow(eye.y - food.pos.y, 2)));
+    }
+
+    function feedForwardAgents() {
         //feed forward the brain from senses to output
         for (i in agents) {
             var a = agents[i];
@@ -418,8 +285,8 @@
 
             //apply output neuron 0: controls turning. Also cap it to a max of 0.3 rotation
             var des = res.out0;
-            if (des > 0.4) des = 0.8;
-            if (des < -0.4) des = -0.8;
+            if (des > 0.6) des = 0.8;
+            if (des < -0.6) des = -0.8;
             a.dir += des;
 
             //wrap direction around to keep it in range of [0, 2pi]
@@ -434,163 +301,63 @@
                 a.boost = 0;
             }
         }
-
-        var interval = 60*100 * params.foodmove;
-        //spawn more food, maybe
-        if ((counter % params.foodaddfreq == 0) && food.length < foodlimit) {
-            var dt = new Date();
-            var seconds = dt.getTime() % interval;
-            var posy = seconds*(HEIGHT/interval);
-            var f = {                
-                pos: new Vector2D(randf(0, WIDTH), posy)
-            };
-            food.push(f);
-        }
-
-        //handle births
-        var bi = -1;
-        for (i in agents) {
-            var a = agents[i];
-            if (a.rep > params.repthr) {
-                //this agent reproduces!
-                bi = i;
-            }
-        }
-
-        if (bi != -1) {
-            var a = agents[bi];
-            a.rep = 0;
-
-            var anew = new Agent();
-            anew.pos = new Vector2D(a.pos.x + randf(-30, 30), a.pos.y + randf(-30, 30));
-            var mutAmt = anew.brain.mutateFrom(a.brain);
-            expectedMutation = 2 * mutrate * braindensity * brainsize;
-            if (mutAmt < expectedMutation) {
-                var hueAdd = 0;
-            }
-            else {
-                var hueAdd = Math.pow(mutAmt - expectedMutation, 2);
-            }            
-            anew.hue = (a.hue + hueAdd) % 360;
-
-            agents.push(anew);
-        }
-
-        //spawn more agents if there are too few agents left
-        if (agents.length < minAgents) {
-            var anew = new Agent();
-            agents.push(anew);
-        }
     }
 
     function draw() {
         ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        drawFood();
+        for (i in agents){
+            drawSingleAgent(agents[i]);
+        }
+    }
 
-        ctx2.clearRect(0,0,WIDTH,120);
-        //draw food
-        ctx.fillStyle = 'rgb(100,230,100)';
+    function drawFood() {
+        ctx.fillStyle = 'hsl(110,30%,70%)';
         for (i in food) {
             var f = food[i];
             drawCircle(f.pos.x, f.pos.y, foodRad);
         }
+    }
 
-        //draw all agents
-        for (i in agents) {
-            var a = agents[i];
+    function drawSingleAgent(a) {
 
-            ctx.save();
-            ctx.translate(a.pos.x, a.pos.y);
-            ctx.rotate(a.dir - Math.PI / 2);
+        ctx.save();
+        ctx.translate(a.pos.x, a.pos.y);
+        ctx.rotate(a.dir - Math.PI / 2);
 
-            //draw its eyes
-            //first compute their position
-            var a1 = -eyesep + Math.PI / 2;
-            var a2 = eyesep + Math.PI / 2;
-            var x1 = Math.cos(a1) * eyelen;
-            var y1 = Math.sin(a1) * eyelen;
-            var x2 = Math.cos(a2) * eyelen;
-            var y2 = Math.sin(a2) * eyelen;
+        //draw its eyes
+        //first compute their position
+        var a1 = -eyesep + Math.PI / 2;
+        var a2 = eyesep + Math.PI / 2;
+        var x1 = Math.cos(a1) * eyelen;
+        var y1 = Math.sin(a1) * eyelen;
+        var x2 = Math.cos(a2) * eyelen;
+        var y2 = Math.sin(a2) * eyelen;
 
-            //draw the eyes, colored by how much food they sense
-            var eyeRad = 3;
-            var s = Math.round(a.s1 * 255.0);
-            ctx.fillStyle = 'rgb(' + s + ',0,0)';
-            drawCircle(x1, y1, eyeRad);
-            var s = Math.round(a.s2 * 255.0);
-            if (s > 255) s = 255;
-            ctx.fillStyle = 'rgb(' + s + ',0,0)';
-            drawCircle(x2, y2, eyeRad);
+        //draw the eyes, colored by how much food they sense
+        var eyeRad = 3;
+        var s = Math.round(a.s1 * 255.0);
+        ctx.fillStyle = 'rgb(' + s + ',0,0)';
+        drawCircle(x1, y1, eyeRad);
+        var s = Math.round(a.s2 * 255.0);
+        if (s > 255) s = 255;
+        ctx.fillStyle = 'rgb(' + s + ',0,0)';
+        drawCircle(x2, y2, eyeRad);
 
-            //draw agent body and outline
-            if (a.selected) {
-                ctx.fillStyle = 'rgba(0,0,0,0)';
-                ctx.strokeStyle = "rgba(0, 0, 0, 1)";
-                drawCircle(0,0,rad+6);
-                ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-            }            
-            ctx.fillStyle = 'hsl(' + a.hue + ', ' + (Math.round(75.0 * a.health)) + '%, 60%)';
-            drawCircle(0, 0, rad);
-            ctx.restore();
-
-            //draw brains
-            var hght = 6;
-            var wdth = 20;
-            var mgn = 2;
+        //draw agent body and outline
+        if (a.selected) {
+            ctx.fillStyle = 'rgba(0,0,0,0)';
+            ctx.strokeStyle = "rgba(0, 0, 0, 1)";
+            drawCircle(0, 0, rad + 6);
             ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-            ctx2.strokeStyle = "rgba(0, 0, 0, 0)";
-            for (var j = 0; j < a.brain.act.length; j++) {
-                var act_j = a.brain.act[j];
-                if (a.selected) {
-                    ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*100) + '%,'+(80+Math.round(20*a.health))+'%)';
-                }
-                else {
-                    ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*70) + '%,'+Math.round(100*a.health)+'%)';
-                }
-                ctx2.beginPath();
-                ctx2.rect(i*wdth, j*hght, wdth-mgn, hght);
-                ctx2.closePath();
-                ctx2.fill();
-                
-            }
-            
         }
+        ctx.fillStyle = 'hsl(' + a.hue + ', 75%, 60%)';
+        drawCircle(0, 0, rad);
+        ctx.restore();
 
-        //draw score
-        //ctx.fillStyle = 'rgb(0,0,0)';
-        //ctx.fillText("Alive: " + agents.length, 10, 20); 
     }
-
+    function keyDown(e) {}
+    function keyUp(e) {}
     function mouseClick(x, y) {
-        console.log(params);
-        
-        //select an agent with mouseclick
-        
-        var i;
-        for (i in agents) {
-            var a = agents[i];
-            var d = Math.sqrt(Math.pow(a.pos.x - x, 2) + Math.pow(a.pos.y - y, 2));
-            if (d < 8 * rad) { //was 3
-
-                //that's a hit! Let's select this one and unselect all others
-                var newset = !a.selected;
-                var j;
-                for (j in agents) {
-                    agents[j].selected = false;
-                }
-                a.selected = newset;
-                console.log("Selected:");
-                console.log(a);               
-
-                return;
-            }
-        }
-        
     }
-
-    function keyUp(key) {}
-
-    function keyDown(key) {}
-
-</script>
-
-</html>
+</script></html>

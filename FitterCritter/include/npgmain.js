@@ -21,7 +21,7 @@ function drawBubble(x, y, w, h, radius) {
     var b = y + h;
     ctx.beginPath();
     ctx.strokeStyle = "black";
-    ctx.lineWidth = "2";
+    ctx.lineWidth = "1";
     ctx.moveTo(x+radius, y);
     ctx.lineTo(x+radius/2, y-10);
     ctx.lineTo(x+radius * 2, y);
