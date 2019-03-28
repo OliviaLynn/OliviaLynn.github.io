@@ -101,18 +101,18 @@
     </div>
     <div class="slidercc">
         <div class="slidercL">
-            <span >Food Refresh Speed: </span><span id="foodaddfreq_t"></span><br />
-            <input type="range" min="1" max="30" value="11" class="slider" id="foodaddfreq_s">
+            <span >Food Refresh Slowness: </span><span id="foodaddfreq_t"></span><br />
+            <input type="range" min="1" max="30" value="9" class="slider" id="foodaddfreq_s">
             <span >Replication Threshold: </span><span id="repthr_t"></span><br />
-            <input type="range" min="1" max="20" value="11" class="slider" id="repthr_s">
+            <input type="range" min="1" max="20" value="13" class="slider" id="repthr_s">
         </div>
 
         <div class="slidercR">
             <span >Food Loss (per tick): </span><span id="foodloss_t"></span><br />
-            <input type="range" min="0.00001" max="0.003" step="0.00001" value="0.00016" class="slider" id="foodloss_s">
+            <input type="range" min="0.00001" max="0.003" step="0.00001" value="0.00209" class="slider" id="foodloss_s">
             
             <span >Food Gain: </span><span id="foodgain_t"></span><br />
-            <input type="range" min="0.05" max="2.25" step="0.05" value="2.25" class="slider" id="foodgain_s">
+            <input type="range" min="0.05" max="2.25" step="0.05" value="0.9" class="slider" id="foodgain_s">
         </div>
     </div>
     <canvas id="NPGcanvas" width="750" height="400">Browser not supported for Canvas. Get a real browser.</canvas>
@@ -539,18 +539,17 @@
             ctx.strokeStyle = "rgba(0, 0, 0, 0)";
             ctx2.strokeStyle = "rgba(0, 0, 0, 0)";
             for (var j = 0; j < a.brain.act.length; j++) {
-                if (a.selected) {
-                    ctx.strokeStyle = "rgba(0, 0, 0, 1)";
-                }
                 var act_j = a.brain.act[j];
-                ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*70) + '%,'+Math.round(100*a.health)+'%)';
+                if (a.selected) {
+                    ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*100) + '%,'+(80+Math.round(20*a.health))+'%)';
+                }
+                else {
+                    ctx2.fillStyle = 'hsla(' + a.hue + ', 50%,' + Math.round(act_j*70) + '%,'+Math.round(100*a.health)+'%)';
+                }
                 ctx2.beginPath();
                 ctx2.rect(i*wdth, j*hght, wdth-mgn, hght);
                 ctx2.closePath();
                 ctx2.fill();
-                if (a.selected) {
-                    ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-                }
                 
             }
             
