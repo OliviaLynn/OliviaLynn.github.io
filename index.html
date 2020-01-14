@@ -2,11 +2,8 @@
 
 <head>
     <title>O.LYNN</title>
-
-    <script src="FitterCritter/include/npgmain.js"></script>
-    <script src="FitterCritter/include/vector2D.js"></script>
-    <script src="FitterCritter/include/evolution.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:700|Julius+Sans+One|Source+Sans+Pro:400,700&display=swap" rel="stylesheet">
+    
     <style type="text/css">
         body {
             width: 700px;
@@ -14,7 +11,7 @@
             margin-left: auto;
             margin-right: auto;
             text-align: center;
-            font-family: Helvetica, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             color: #444;
         }
 
@@ -49,13 +46,15 @@
 
         h1 {
             font-weight: normal;
-            font-size: 36px;
+            font-size: 62px;
+            font-family: 'Julius Sans One', sans-serif;
         }
 
         h2 {
-            font-weight: normal;
-            font-size: 22px;
+            font-weight: bold;
+            font-size: 24px;
             text-align: center;
+            font-family: 'Archivo Narrow', sans-serif;
         }
 
         h3 {
@@ -81,283 +80,36 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
+        .hue1 {
+            color: cadetblue;
+        }
     </style>
 </head>
 
-<body onLoad="NPGinit(50);">
+<body>
 
     <h1>OLIVIA LYNN</h1>
-    <p>I develop <span class="hue1">games</span>, <span class="hue1">data viz</span>, <span class="hue1">mobile apps</span>, and <span class="hue1">websites</span>.</p>
+    <h2>Code for <span class="hue1">apps</span>, <span class="hue1">automation</span>, and <span class="hue1">art</span>.</h2>
+    <P>I study computers, art, and some digital humanities at Carnegie Mellon University.</p>
+    <p>I've been taking some time off to work at Audtomadable, a technology company in Pittsburgh.</p>
+    <p>I'll be returning to CMU for my last two semesters of a new, self-defined major this August.</P>
     <br />
-    <p>Lately I've been spending time on:
+    <h2>Recent projects:</h2>
         <ul>
-            <li>Coded-from-scratch <br /><span class="hue2">machine learning</span> models
-            <li>More <span class="hue2">Android</span> app development</li>
-            <li>GLSL <span class="hue2">Shaders</span></li>
+            <li>Custom Android TV launcher built in Unity</li>
+            <li>A centralized mobile app for IOT control over lightbulbs and switches that come from sources.</li>
+            <li>A Bluetooth beacon scanner that runs on a Raspberry Pi.</li>
         </ul>
-    </p>
+    
     <br />
-    <p>Check out my <a href="https://www.linkedin.com/in/olivia-lynn/">Linkedin</a> and <a href="https://github.com/oliviaLynn">Github</a>.</p>
-    <p class="disclaimer">(Small disclaimer - I don't use my Github much these days<br />due to of academic integrity, Unity's own version control, etc.)</p>
-    <br /><br />
-    <h2>FITTER &#183; CRITTER</h2>
-    <p class="disclaimer">A (tiny) peak of <a href="olivialynn.github.io/critter">my current side project</a>.</p>
-    <canvas id="NPGcanvas" width="400" height="300">Browser not supported for Canvas.</canvas>
+    <h2>Upcoming projects:</h2>
+    <ul>
+    <li>Sonification of a neural network getting trained, for a show this April.</li>
+    <li>Livecoding in Tidalcycles.</li>
+    <li>Collaboritive modular synth experience via phone apps.</li>
+    </ul></p>
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <h2>Check out my <a href="https://www.linkedin.com/in/olivia-lynn/">Linkedin</a> and <a href="https://github.com/oliviaLynn">Github</a>.</h2>
 </body>
-<script type="text/javascript">
-    var agents = [];
-    var food = [];
-
-    var rad = 12;
-    var eyesep = 0.6;
-    var eyelen = 25;
-    var eyesens = 0.0005;
-    var eyemult = 0.5;
-
-    var foodaddfreq = 31;
-    var foodmove = 0.2;
-    var foodRad = 5;
-    var foodlimit = 20;
-
-    var boostcost = 0.001;
-
-    var hiddenLayers = 20;
-    var hiddenUnitsPerLayer = 3;
-    var mutrate= 0.2;
-    var mutrate2= 0.4;
-
-
-    canvas = document.getElementById('NPGcanvas');
-    ctx = canvas.getContext('2d');
-    var sampleAgent = new Agent();
-    sampleAgent.pos.x = 100;
-    sampleAgent.pos.y = 100;
-    
-sampleAgent.brain.act = [0.10887418593459602,0.05474511369325997,0,1,1,1,1,0.421159879299083,0.7548588463966104,0.3858638709763918,0.32612580981800593,0.18348835976487826,0.456655244297069,0.5736818402000642,0.47395459228312664,0.6659513013921142,0.24926610094493645,0.5453273895759873,0.44873357567385624,0.41930912040553137];
-sampleAgent.brain.w = [[0.9298457285540269,1.0217751886359827,1.1284671385426295],[-0.09065456284088136,0.2404156119136326,-2.3612349232387824],[0.7352546412651835,0.26159472203613565,-0.13356914298674183],[1.3640648996240357,-0.5865428886775244,-0.9547967052101658],[-1.34489130277464,1.3152210895640766,2.155621929008327],[-0.4996378435221782,0.21859346597691523,-0.38216851234706184],[-1.0600797457946842,0.4432685334424711,-0.3370524927606642],[0.002796034285437843,-0.3921524160955936,-0.5943317126921821],[-0.29586687494732933,0.5658395007286088,1.0208454476468123],[-0.5955786378161215,-1.0260401611859764,0.5019261316017376],[-0.6798252544308713,-0.11631018847289232,-0.4983169691365379],[-0.0818484340426846,-1.0002676924451401,-0.8403849844481672],[-0.3595514021093913,0.2225385547355074,0.5262737344340607],[1.5497530920210072,-0.4958779527401205,0.3153903493889474],[0.13073679136824246,0.376523194482715,-0.6611459850708472],[0.37552051571766243,-0.46633133744138383,0.706227885248738],[-1.0519261788958374,1.1411152651479415,-0.6714942193663116],[-0.06436703127514176,-0.0470374114873362,0.33735343406932683],[-1.6230861887605847,0.5633484775413384,-1.0776083314796818],[1.1885614552613315,0.7418201079629061,-1.05210839415972]];
-    sampleAgent.brain.ix = [[9,0,3],[3,19,7],[6,0,18],[10,16,10],[6,0,19],[17,17,1],[7,13,18],[19,7,16],[2,11,5],[1,7,2],[13,19,13],[7,3,17],[8,18,2],[10,15,9],[3,17,15],[17,14,5],[6,0,16],[2,16,13],[1,15,12],[0,2,19]];
-    
-
-    function myinit() {
-        counter = 0;
-        ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-        ctx.font = "12pt Arial";
-        ctx.lineWidth = "1";
-
-        agents.push(sampleAgent);
-        var a = sampleAgent;
-        a.rep = 0;
-
-        var anew = new Agent();
-        anew.pos = new Vector2D(a.pos.x + randf(-30, 30), a.pos.y + randf(-30, 30));
-        var mutAmt = anew.brain.mutateFrom(a.brain);
-        var hueAdd = Math.pow(mutAmt, 2);
-        anew.hue = (a.hue + hueAdd) % 360;
-        agents.push(anew);
-        
-        var clr1 = "hsl(" + a.hue +", 85%, 35%)";
-        var clr2 = "hsl(" + anew.hue + ", 85%, 35%)";
-        var elemsClr1 = document.getElementsByClassName('hue1');
-        for (var i = 0; i < elemsClr1.length; i++) {
-            var elem = elemsClr1[i];
-            console.log(elem);
-            if (elem != undefined) {
-                elem.style.color = clr1;
-            }
-        }
-        var elemsClr2 = document.getElementsByClassName('hue2');
-        for (var i = 0; i < elemsClr2.length; i++) {
-            var elem = elemsClr2[i];
-            console.log(elem);
-            if (elem != undefined) {
-                elem.style.color = clr2;
-            }
-        }
-    }
-
-    function update() {
-        counter = counter + 1;
-
-        // Move
-        for (i in agents) {
-            var a = agents[i];
-            moveAgent(a);
-        }
-
-        // Now that we've moved, check for collisions
-        //handleAgentCollision();
-
-        // Eat food and calculate eye sense
-        eatAndComputeInputs();
-        
-        feedForwardAgents();
-        spawnFoodMaybe();
-    }
-
-    function spawnFoodMaybe() {
-        var interval = 60 * 100 * foodmove;
-        //spawn more food, maybe
-        if ((counter % foodaddfreq == 0) && food.length < foodlimit) {
-            var dt = new Date();
-            var seconds = dt.getTime() % interval;
-            var posy = seconds * (HEIGHT / interval);
-            var f = {
-                pos: new Vector2D(randf(0, WIDTH), posy)
-            };
-            food.push(f);
-        }
-
-    }
-
-    function eatAndComputeInputs() {
-        //check if any agent ate food
-        //and while we're at it, compute input to sense
-        killi = -1;
-        for (i in agents) {
-
-            // Inputs
-            var a = agents[i];
-            a.s1 = 0;
-            a.s2 = 0;
-
-            for (j in food) {
-                var f = food[j];
-                var distAgent2Food = eucDistFromPos(a.pos, f.pos);
-
-                // Eat available food
-                if (distAgent2Food < rad + foodRad) {
-                    killi = j;
-                }
-
-                // Sense nearby food
-                if (distAgent2Food < rad * 10) {
-                    eyes = getEyePos(a);
-                    a.s1 += eyeSense(eyes.L, f);
-                    a.s2 += eyeSense(eyes.R, f);
-                }
-            }
-        }
-        if (killi != -1) food.splice(killi, 1);
-    }
-
-    function eucDistFromPos(a, b) {
-        return Math.sqrt(Math.pow(a.x - b.x, 2) +
-            Math.pow(a.y - b.y, 2));
-    }
-
-    function getEyePos(agent) {
-        // right and left might be flipped, this was arbitrary
-        // and i haven't bothered checking since the names are only
-        // for readability
-        left = {
-            x: 0,
-            y: 0
-        };
-        left.x = agent.pos.x + eyelen * Math.cos(agent.dir - eyesep);
-        left.y = agent.pos.y + eyelen * Math.sin(agent.dir - eyesep);
-        right = {
-            x: 0,
-            y: 0
-        };
-        right.x = agent.pos.x + eyelen * Math.cos(agent.dir + eyesep);
-        right.y = agent.pos.y + eyelen * Math.sin(agent.dir + eyesep);
-        return {
-            L: left,
-            R: right
-        }
-    }
-
-    function eyeSense(eye, food) {
-        return eyemult * Math.exp(-eyesens * (Math.pow(eye.x - food.pos.x, 2) +
-            Math.pow(eye.y - food.pos.y, 2)));
-    }
-
-    function feedForwardAgents() {
-        //feed forward the brain from senses to output
-        for (i in agents) {
-            var a = agents[i];
-            res = a.brain.tick(a.s1, a.s2);
-
-            //apply output neuron 0: controls turning. Also cap it to a max of 0.3 rotation
-            var des = res.out0;
-            if (des > 0.6) des = 0.8;
-            if (des < -0.6) des = -0.8;
-            a.dir += des;
-
-            //wrap direction around to keep it in range of [0, 2pi]
-            if (a.dir > 2 * Math.PI) a.dir = a.dir - 2 * Math.PI;
-            if (a.dir < 0) a.dir = 2 * Math.PI + a.dir;
-
-            //apply output neuron 1: controls boost
-            des = res.out1;
-            if (des > 0) {
-                a.boost = des;
-            } else {
-                a.boost = 0;
-            }
-        }
-    }
-
-    function draw() {
-        ctx.clearRect(0, 0, WIDTH, HEIGHT);
-        drawFood();
-        for (i in agents){
-            drawSingleAgent(agents[i]);
-        }
-    }
-
-    function drawFood() {
-        ctx.fillStyle = 'hsl(110,30%,70%)';
-        for (i in food) {
-            var f = food[i];
-            drawCircle(f.pos.x, f.pos.y, foodRad);
-        }
-    }
-
-    function drawSingleAgent(a) {
-
-        ctx.save();
-        ctx.translate(a.pos.x, a.pos.y);
-        ctx.rotate(a.dir - Math.PI / 2);
-
-        //draw its eyes
-        //first compute their position
-        var a1 = -eyesep + Math.PI / 2;
-        var a2 = eyesep + Math.PI / 2;
-        var x1 = Math.cos(a1) * eyelen;
-        var y1 = Math.sin(a1) * eyelen;
-        var x2 = Math.cos(a2) * eyelen;
-        var y2 = Math.sin(a2) * eyelen;
-
-        //draw the eyes, colored by how much food they sense
-        var eyeRad = 3;
-        var s = Math.round(a.s1 * 255.0);
-        ctx.fillStyle = 'rgb(' + s + ',0,0)';
-        drawCircle(x1, y1, eyeRad);
-        var s = Math.round(a.s2 * 255.0);
-        if (s > 255) s = 255;
-        ctx.fillStyle = 'rgb(' + s + ',0,0)';
-        drawCircle(x2, y2, eyeRad);
-
-        //draw agent body and outline
-        if (a.selected) {
-            ctx.fillStyle = 'rgba(0,0,0,0)';
-            ctx.strokeStyle = "rgba(0, 0, 0, 1)";
-            drawCircle(0, 0, rad + 6);
-            ctx.strokeStyle = "rgba(0, 0, 0, 0)";
-        }
-        ctx.fillStyle = 'hsl(' + a.hue + ', 75%, 60%)';
-        drawCircle(0, 0, rad);
-        ctx.restore();
-
-    }
-    function keyDown(e) {}
-    function keyUp(e) {}
-    function mouseClick(x, y) {
-    }
-</script></html>
+</html>
