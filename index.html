@@ -159,7 +159,6 @@
         }
 
         function buildCellHtmlv2(id, qty, result) {
-            console.log(result);
             var icon = result.item.icon;
             var name = result.item.name;
             var price = cleanPrice(result.item.current.price);
@@ -178,7 +177,6 @@
 
         // ----------- Drawing out the crafting free
         function addCommas(nStr) {
-            console.log(nStr);
             nStr += '';
             x = nStr.split('.');
             x1 = x[0];
@@ -187,7 +185,6 @@
             while (rgx.test(x1)) {
                 x1 = x1.replace(rgx, '$1' + ',' + '$2');
             }
-            console.log( x1 + x2);
             return x1 + x2;
         }
 
