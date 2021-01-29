@@ -1,0 +1,175 @@
+/* ty to https://www.cssscript.com/clean-tree-diagram/ */
+/* changes: */
+/* added hover */
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+body {
+    margin: 40px;
+}
+
+div {
+    margin-right: 0.75em;
+    margin-left: auto;
+    height: 3em;
+}
+button {
+    padding: 0.6em;
+    background-color: #eee;
+    border: solid .1em #666;
+    border-radius: .2em; 
+  width: 8em;
+  padding: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    
+}
+#lastupdated {
+    font-style: italic;
+}
+
+#posprofit, #posprofitnosym {
+    color: #88bbee;
+    font-weight: bold;
+}
+#posprofit:before {
+    content: "\25B2";
+}
+#negprofit, negprofitnosym {
+    color: #ee9999;
+    font-weight: bold;
+}
+#negprofit:before {
+    content: "\25BC";
+}
+.num, #posprofit, #negprofit {
+    text-align: right;
+}
+
+th, td {
+  padding: 0 15 2 15; //todo em
+  text-align: left;
+}
+
+th {
+    text-align: left;
+}
+
+tr#total {
+    font-weight: bold;
+}
+
+img.cns { //todo em
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: -3px;
+}
+
+img.icon {
+    filter: brightness(120%);
+}
+img.tableicon {
+    filter: brightness(120%);
+    margin-bottom: -0.5em;
+}
+
+
+
+.tree,
+.tree ul,
+.tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.tree {
+    margin: 0 0 1em;
+    text-align: center;
+}
+
+.tree,
+.tree ul {
+    display: table;
+}
+
+.tree ul {
+    width: 100%;
+}
+
+.tree li {
+    display: table-cell;
+    padding: .5em 0;
+    vertical-align: top;
+    
+}
+
+.tree>li>span {
+  width: 100%;
+}
+
+.tree span:hover {
+  background-color: #cceeff;
+}
+.tree span[data-sel="true"] {
+  background-color: #aaddff;
+}
+
+.tree li:before {
+    outline: solid 1px #666;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.tree li:first-child:before {
+    left: 50%;
+}
+
+.tree li:last-child:before {
+    right: 50%;
+}
+
+.tree code,
+.tree span {
+    border: solid .1em #666;
+    border-radius: .2em;
+    display: inline-block;
+    margin: 0 .2em .5em;
+    padding: .2em .5em;
+    position: relative;
+}
+
+.tree ul:before,
+.tree code:before,
+.tree span::before {
+    outline: solid 1px #666;
+    content: "";
+    height: .5em;
+    left: 50%;
+    position: absolute;
+}
+
+.tree ul:before {
+    top: -.5em;
+}
+
+.tree code:before,
+.tree span:before {
+    top: -.55em;
+}
+
+.tree>li {
+    margin-top: 0;
+}
+
+.tree>li:before,
+.tree>li:after,
+.tree>li>code:before,
+.tree>li>span:before {
+    outline: none;
+}

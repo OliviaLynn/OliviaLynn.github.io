@@ -1,117 +1,335 @@
 <html>
 
 <head>
-    <title>O.LYNN</title>
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:700|Julius+Sans+One|Source+Sans+Pro:400,700&display=swap" rel="stylesheet">
-    
-    <style type="text/css">
-        body {
-            width: 700px;
-            margin-top: 100px;
-            margin-bottom: 300px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            font-family: 'Source Sans Pro', sans-serif;
-            color: #444;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 22px;
-            text-align: center;
-
-        }
-
-        a {
-            color: hsl(220, 25%, 60%);
-        }
-
-        ul {
-            list-style-type: square;
-            list-style-position: inside;  
-            padding-inline-start: 0px;
-        }
-        li {
-            margin-bottom: 15px;
-            margin-left: -15px;
-        }
-
-        canvas {
-            border: 1px solid #555;
-            margin-top: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h1 {
-            font-weight: normal;
-            font-size: 62px;
-            font-family: 'Julius Sans One', sans-serif;
-        }
-
-        h2 {
-            font-weight: bold;
-            font-size: 24px;
-            text-align: center;
-            font-family: 'Archivo Narrow', sans-serif;
-        }
-
-        h3 {
-            font-weight: normal;
-            font-size: 16px;
-        }
-
-        em {
-            font-style: normal;
-            text-decoration: underline;
-        }
-
-        .disclaimer {
-            color: #666;
-            font-size: 12px;
-            margin-top: -10px;
-            font-style: italic;
-            line-height: 16px;
-        }
-
-        .center {
-            width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hue1 {
-            color: cadetblue;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='tree.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+    <script>
+        var ge_data = {
+            "213": {
+                "id": "213",
+                "name": "Grimy kwuarm",
+                "price": "11200",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=213"
+            },
+            "263": {
+                "id": "263",
+                "name": "Clean kwuarm",
+                "price": "11400",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=263"
+            },
+            "40285": {
+                "id": "40285",
+                "name": "Acadia logs",
+                "price": "622",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=40285"
+            },
+            "20266": {
+                "id": "20266",
+                "name": "Accursed ashes",
+                "price": "3435",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=20266"
+            },
+            "47689": {
+                "id": "47689",
+                "name": "Acadia incense sticks",
+                "price": "1839",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47689"
+            },
+            "47696": {
+                "id": "47696",
+                "name": "Accursed acadia incense sticks",
+                "price": "3107",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47696"
+            },
+            "47709": {
+                "id": "47709",
+                "name": "Kwuarm incense sticks",
+                "price": "26400",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47709"
+            }
+        };
+        var tree_data = {
+            id: "47709",
+            quantity: 1,
+            mats: [{
+                    id: "263",
+                    quantity: 1,
+                    mats: [{
+                        id: "213",
+                        quantity: 1,
+                        mats: []
+                    }]
+                },
+                {
+                    id: "47696",
+                    quantity: 1,
+                    mats: [{
+                        id: "47689",
+                        quantity: 1,
+                        mats: [{
+                            id: "40285",
+                            quantity: 2,
+                            mats: []
+                        }]
+                    }, {
+                        id: "20266",
+                        quantity: 2,
+                        mats: []
+                    }]
+                }
+            ]
+        };
+        //var kis1 = "47709-1(263-1(213-1),47696-1(47689-1(40285-2),20266-2))";
+        //var kis2 = "{id:47709,qty:1,ms:[{id:263,qty:1,ms:[{is:213,qty:1}]},{id:47696,qty:1,ms:[{id:47689,qty:1,ms:[{id:40285,qty:2}]},{id:20266,qty:2}]}]}";
+        var kwuarm_incense_sticks = "{id:47709,q:1,ms:[{id:263,q:1,ms:[{id:213,q:1}]},{id:47696,q:1,ms:[{id:47689,q:1,ms:[{id:40285,q:2}]},{id:20266,q:2}]}]}";
+        var craft_tree_json = {
+            id: 47709,
+            q: 1,
+            ms: [{
+                id: 263,
+                q: 1,
+                ms: [{
+                    id: 213,
+                    q: 1
+                }]
+            }, {
+                id: 47696,
+                q: 1,
+                ms: [{
+                    id: 47689,
+                    q: 1,
+                    ms: [{
+                        id: 40285,
+                        q: 2
+                    }]
+                }, {
+                    id: 20266,
+                    q: 2
+                }]
+            }]
+        };
 
-    <h1>OLIVIA LYNN</h1>
-    <h2>Code for <span class="hue1">apps</span>, <span class="hue1">automation</span>, and <span class="hue1">art</span>.</h2>
-    <P>I study computers, art, and some digital humanities at Carnegie Mellon University.</p>
-    <p>I've been taking some time off to develop smart hotel technology at <a href="https://staypittsburgh.com/">Stay Pittsburgh</a> and <a href="https://www.automadable.com/">Automadable</a>.</p>
-    <p>I'll be returning to CMU for my last two semesters of a new, self-defined major this August.</P>
-    <br />
-    <h2>Recent projects:</h2>
-        <ul>
-            <li><a href="https://github.com/OliviaLynn/Android-TV-Launcher">Custom Android TV launcher</a> with built-in weather and events as well as customized data for individual hotel guests.</li>
-            <li><a href="https://github.com/OliviaLynn/SuiteSmart-Interactive-TV">Centralized mobile app</a> for simultaneous IOT control over lightbulbs/switches that come different companies.</li>
-            <li><a href="https://github.com/OliviaLynn/Bluetooth-Beacon-Scanner">Bluetooth beacon scanner</a> that runs on a Raspberry Pi and sends live updates of detected addresses/RSSIs to a UDP server.</li>
-        </ul>
-    
-    <br />
-    <h2>Upcoming projects:</h2>
-    <ul>
-    <li>Sonification of a neural network getting trained, for a show this April.</li>
-        <li>Livecoding in Tidalcycles, potential revival of <a href="https://livecodepgh.org/">Livecode PGH</a>.</li>
-    <li>Collaboritive modular synth experience via phone apps.</li>
-    </ul></p>
-    <br />
-    <br />
-    <h2>Check out my <a href="https://www.linkedin.com/in/olivia-lynn/">Linkedin</a> and <a href="https://github.com/oliviaLynn">Github</a>.</h2>
-</body>
-</html>
+
+        // BIG PICTURE TO DO
+        // http get request via js, to update ge_data
+        // add dom elements properly instead
+        // learn to store things in cache - ge data, at least
+        // new crafting trees: manually, make an interactive creator where others can manually craft their own (exp/imp as a txt file), scrape from wiki?
+        // verifying on selection - deselect parents/children
+        // optimise for lowest price
+
+
+        // todo our ge scraper needs to parse the prices - will be anything from
+        // 622 to 1,839 to 11.2k
+
+        // for now, assuming an id within a crafting tree will be unique
+        // but i don't actually have any guarantee this is always true, so, todo
+
+        //todo title, img alts
+
+        // ----------- DOM
+        $("body").append("<div id='updateheader'><button id='update'>Update Data</button> <small id='lastupdated'>Last updated ___ </small></div>");
+        $("body").append("<ul class='tree'>" + itemToHtml(craft_tree_json) + "</ul>");
+        $("body").append("<table id='selected'></table>");
+
+        // ----------- Getting data
+        const proxy1 = "https://cors-anywhere.herokuapp.com/";
+        const base_url1 = proxy1 + "https://secure.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+        $('#update').click(function() {
+            updateDataInTree();
+                var utc = new Date().toJSON().slice(0, 16).replace(/-/g, '/').replace('T', ' ');
+                $("#lastupdated").text("Last updated " + utc + " (UTC)");
+            
+        })
+
+        function updateDataInTree() {
+            const proxy = "https://cors-anywhere.herokuapp.com/";
+            const base_url = proxy + "https://secure.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+            $("body").find("span").each(function(n, el) {
+                $.getJSON(base_url + el.getAttribute("id"), function(result) {
+                    $("#" + el.getAttribute("id")).replaceWith(buildCellHtmlv2(el.getAttribute("id"), el.getAttribute("data-qty"), result));
+                });
+            });
+
+        }
+
+        function buildCellHtmlv2(id, qty, result) {
+            console.log(result);
+            var icon = result.item.icon;
+            var name = result.item.name;
+            var price = cleanPrice(result.item.current.price);
+            var html = "<span onclick=selectItem(this," + id + "," + qty + ") "
+            html += "id='" + id + "' ";
+            html += "data-qty='" + qty + "' ";
+            html += "data-name='" + name + "' ";
+            html += "data-icon='" + icon + "' ";
+            html += "data-price='" + price + "' ";
+            html += "data-sel='false'>";
+            html += "<img class = 'icon' src='" + icon + "'><br>";
+            html += "<small>" + qty + " x</small> " + name;
+            html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(qty, price) + "</small></span>";
+            return html;
+        }
+
+        // ----------- Drawing out the crafting free
+        function addCommas(nStr) {
+            console.log(nStr);
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            console.log( x1 + x2);
+            return x1 + x2;
+        }
+
+        function getPriceString(quantity, price) {
+            if (quantity == 1) {
+                return addCommas(price);
+            } else {
+                return addCommas(quantity * price) + " (" + addCommas(price) + ")";
+            }
+        }
+
+        function cleanPrice(str) {
+            return ("" + str).replace(",", "").replace(".", "").replace("k", "00");
+        }
+
+        function buildCellHtml(id, qty) {
+            /*
+            const proxy2 = "https://cors-anywhere.herokuapp.com/";
+            const base_url2 = proxy2 + "https://secure.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+            $.getJSON(base_url2 + id, function(result) {
+                console.log(result);
+                var icon = result.item.icon;
+                var name = result.item.name;
+                var price = cleanPrice(result.item.current.price);
+                var html = "<span onclick=selectItem(this," + id + "," + qty + ") "
+                html += "id='" + id + "' ";
+                html += "data-qty='" + qty + "' ";
+                html += "data-name='" + name + "' ";
+                html += "data-icon='" + icon + "' ";
+                html += "data-price='" + price + "' ";
+                html += "data-sel='false'>";
+                html += "<img class = 'icon' src='" + icon + "'><br>";
+                html += "<small>" + qty + " x</small> " + name;
+                html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(qty, price) + "</small></span>";
+                return html;
+            });
+            */
+            var icon = ""; //ge_data[id].icon;
+            var name = id; //ge_data[id].name;
+            var price = ""; //ge_data[id].price;
+            var html = "<span onclick=selectItem(this," + id + "," + qty + ") "
+            html += "id='" + id + "' ";
+            html += "data-qty='" + qty + "' ";
+            html += "data-name='" + name + "' ";
+            html += "data-icon='" + icon + "' ";
+            html += "data-price='" + price + "' ";
+            html += "data-sel='false'>";
+            //html += "<img class = 'icon' src='" + icon + "'><br>";
+            html += "<small>" + qty + " x</small> " + name;
+            html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(qty, price) + "</small></span>";
+            return html;
+        }
+
+        function itemToHtml(item) {
+            var html = "<li>";
+            html += buildCellHtml(item.id, item.q);
+
+            if (typeof(item.ms) == "undefined" || item.ms.length == 0) { // if leaf                
+                return html + "</li>";
+            } else { // if branch                
+                html += "<ul>";
+                for (material in item.ms) {
+                    html += itemToHtml(item.ms[material]);
+                }
+                html += "</ul>";
+                return html + "</li>";
+            }
+        }
+
+        // ----------- Table of selected nodes
+        var selected = {};
+
+        function getTotalCost() {
+            cost = 0;
+            for (var [item_id, quantity] of Object.entries(selected)) {
+                cost += quantity * ge_data[item_id].price;
+            }
+            return cost;
+        }
+
+        function getTotalProfit() {
+            return ge_data[tree_data.id].price - getTotalCost();
+        }
+
+        function getProfitColor(addSymbol) {
+            if (addSymbol) {
+                if (getTotalProfit() >= 0) {
+                    return "id='posprofit'"
+                } else {
+                    return "id='negprofit'"
+                }
+            } else {
+
+                if (getTotalProfit() >= 0) {
+                    return "id='posprofitnosym'"
+                } else {
+                    return "id='negprofitnosym'"
+                }
+            }
+        }
+
+        function deselectConflictingCells(item_id) {
+            // traverse children
+
+            $("#" + item_id).parent().find("span").each(function(el, key) {
+                key.setAttribute("data-sel", "false");
+                delete(selected[key.getAttribute("id")]);
+            });
+            // traverse ancestors
+            $("#" + item_id).parents("li").each(function(index) {
+                $(this).children("span").each(function(el, key) {
+                    key.setAttribute("data-sel", "false");
+                    delete(selected[key.getAttribute("id")]);
+                });
+            });
+        }
+
+        function selectItem(el, item_id, quantity) {
+            if (typeof(selected[item_id]) == "undefined") {
+                deselectConflictingCells(item_id);
+                selected[item_id] = quantity;
+                el.setAttribute("data-sel", "true");
+            } else {
+                delete(selected[item_id]);
+                el.setAttribute("data-sel", "false");
+            }
+
+            new_html = "<tr><th></th><th>Qty</th><th>Name</th><th>Cost</th></tr>";
+            for (var [item_id, quantity] of Object.entries(selected)) {
+                new_html += "<tr>";
+                new_html += "<td><img class = 'tableicon' src='" + ge_data[item_id].icon + "'></td>";
+                new_html += "<td>" + quantity + "</td>";
+                new_html += "<td>" + ge_data[item_id].name + "</td>";
+                new_html += "<td class='num'>" + addCommas(quantity * ge_data[item_id].price) + "</td>";
+                new_html += "</tr>";
+            }
+            // todo neater profit color css - can we make css conditional?
+            new_html += "<tr id='total'><td></td><td></td><td>Total Cost</td><td class='num'>" + addCommas(getTotalCost()) + "</td></tr>";
+            new_html += "<tr><td></td><td></td><td><small " + getProfitColor(false) + ">Profit</small></td><td><small " + getProfitColor(true) + ">" + addCommas(getTotalProfit()) + "</small></td></tr>";
+            $("#selected").html(new_html);
+        }
+    </script>
+
+
+</body></html>
