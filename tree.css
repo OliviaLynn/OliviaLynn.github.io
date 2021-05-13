@@ -1,6 +1,4 @@
 /* ty to https://www.cssscript.com/clean-tree-diagram/ */
-/* changes: */
-/* added hover */
 
 * {
     font-family: 'Open Sans', sans-serif;
@@ -25,6 +23,12 @@ button {
     margin-right: 3px;
     
 }
+select {
+    height: 3em;
+    margin-left: 3px;
+    margin-right: 6px;
+    
+}
 #lastupdated {
     font-style: italic;
 }
@@ -46,6 +50,19 @@ button {
 .num, #posprofit, #negprofit {
     text-align: right;
 }
+
+.untradable {
+    font-style: italic;
+    font-size: x-small;
+    color: grey;
+}
+.untradable:before {
+    content:"[";
+}
+.untradable:after {
+    content:"]";
+}
+
 
 th, td {
   padding: 0 15 2 15; //todo em

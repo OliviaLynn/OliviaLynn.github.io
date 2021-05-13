@@ -1,0 +1,189 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    margin: 60px;
+}
+
+h1 {
+    font-size: 2.5em
+}
+
+h2.subtitle {
+    font-style: italic;
+    font-weight: 600;
+    margin-top: -1.5em;
+    font-size: 1em;
+}
+
+div#top-right {
+    position: absolute;
+    top: 60px;
+    right: 70px;
+}
+
+div#top-right > p {
+    text-align: right;
+    margin: 0;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #d95b43;
+}
+
+a:visited {
+    color: #c02942;
+}
+
+a:hover {
+    color: #bca878;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+    flex: 32%;
+    max-width: 32%;
+    padding: 0 4px;
+}
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+
+    background: #1abc9c;
+    -webkit-transition: .15s ease-in-out;
+    transition: .15s ease-in-out;
+}
+
+.img-wrap {
+    position: relative;
+}
+
+.img-wrap:hover .img-label {
+    visibility: visible;
+    opacity: 1;
+}
+
+.img-wrap:hover .img-label-top,
+.img-wrap:hover .img-label-bot {
+    visibility: visible;
+    opacity: 1;
+}
+
+.img-wrap:hover img {
+    filter: brightness(30%) hue-rotate(90deg);
+}
+
+.img-label-top {
+    position: absolute;
+    margin: 0;
+    top: 0.2em;
+    left: 0.2em;
+    color: #fff;
+    font-size: 2em;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.img-label-bot {
+    position: absolute;
+    margin: 0;
+    bottom: 0.2em;
+    left: 0.2em;
+    color: #fff;
+    font-size: 1.2em;
+    visibility: hidden;
+    opacity: 0;
+
+}
+
+.img-label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 2em;
+    margin-top: -0.5em;
+    transform: translate(0%, 50%);
+
+
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+}
+
+
+/* Responsive layout - small screen shows 2 col */
+@media screen and (max-width: 960px) and (min-width: 801px) {
+    .img-label-bot {
+        font-size: 1em;
+    }
+}
+@media screen and (max-width: 800px) and (min-width: 701px) {
+    .img-label-bot {
+        font-size: 0.8em;
+    }
+}
+@media screen and (max-width: 700) and (min-width: 651px) {
+    .img-label-bot {
+        font-size: 1em;
+    }
+}
+@media screen and (max-width: 650px) and (min-width: 601px) {
+    .img-label-bot {
+        font-size: 1em;
+    }
+}
+
+
+@media screen and (max-width: 740px) and (min-width: 701px) {
+    .column {
+        flex: 32%;
+        max-width: 32%;
+        padding: 0 3.5px;
+        transition: ease all .5s;
+        background: red;
+    }
+}
+
+@media screen and (max-width: 700px) and (min-width: 601px) {
+    .column {
+        flex: 48%;
+        max-width: 48%;
+        transition: ease all .5s;
+        background: yellow;
+    }
+}
+
+/* Responsive layout - tiny screen shows 1 col */
+@media screen and (max-width: 600px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+        transition: ease all .5s;
+    }
+
+    .img-label-top {
+        font-size: 3em;
+    }
+    .img-label-bot {
+        font-size: 1.5em;
+    }
+}

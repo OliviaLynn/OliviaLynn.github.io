@@ -1,0 +1,445 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='tree.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var ge_data = {
+            "213": {
+                "id": "213",
+                "name": "Grimy kwuarm",
+                "price": "11200",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=213"
+            },
+            "263": {
+                "id": "263",
+                "name": "Clean kwuarm",
+                "price": "11400",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=263"
+            },
+            "40285": {
+                "id": "40285",
+                "name": "Acadia logs",
+                "price": "622",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=40285"
+            },
+            "20266": {
+                "id": "20266",
+                "name": "Accursed ashes",
+                "price": "3435",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=20266"
+            },
+            "47689": {
+                "id": "47689",
+                "name": "Acadia incense sticks",
+                "price": "1839",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47689"
+            },
+            "47696": {
+                "id": "47696",
+                "name": "Accursed acadia incense sticks",
+                "price": "3107",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47696"
+            },
+            "47709": {
+                "id": "47709",
+                "name": "Kwuarm incense sticks",
+                "price": "26400",
+                "icon": "https://secure.runescape.com/m=itemdb_rs/1611572491866_obj_sprite.gif?id=47709"
+            }
+        };
+        var tree_data = {
+            id: "47709",
+            quantity: 1,
+            mats: [{
+                    id: "263",
+                    quantity: 1,
+                    mats: [{
+                        id: "213",
+                        quantity: 1,
+                        mats: []
+                    }]
+                },
+                {
+                    id: "47696",
+                    quantity: 1,
+                    mats: [{
+                        id: "47689",
+                        quantity: 1,
+                        mats: [{
+                            id: "40285",
+                            quantity: 2,
+                            mats: []
+                        }]
+                    }, {
+                        id: "20266",
+                        quantity: 2,
+                        mats: []
+                    }]
+                }
+            ]
+        };
+        //var kis1 = "47709-1(263-1(213-1),47696-1(47689-1(40285-2),20266-2))";
+        //var kis2 = "{id:47709,qty:1,ms:[{id:263,qty:1,ms:[{is:213,qty:1}]},{id:47696,qty:1,ms:[{id:47689,qty:1,ms:[{id:40285,qty:2}]},{id:20266,qty:2}]}]}";
+        var kwuarm_incense_sticks = "{id:47709,q:1,ms:[{id:263,q:1,ms:[{id:213,q:1}]},{id:47696,q:1,ms:[{id:47689,q:1,ms:[{id:40285,q:2}]},{id:20266,q:2}]}]}";
+        var kis_json = {
+            id: 47709,
+            q: 1,
+            ms: [{
+                id: 263,
+                q: 1,
+                ms: [{
+                    id: 213,
+                    q: 1
+                }]
+            }, {
+                id: 47696,
+                q: 1,
+                ms: [{
+                    id: 47689,
+                    q: 1,
+                    ms: [{
+                        id: 40285,
+                        q: 2
+                    }]
+                }, {
+                    id: 20266,
+                    q: 2
+                }]
+            }]
+        };
+
+        var er_json = {
+            id: -1,
+            q: 1,
+            nm: "Extreme ranging",
+            pic: "https://runescape.wiki/images/7/79/Extreme_ranging_%284%29.png?7777e",
+            ms: [{
+                id: 2444,
+                q: 1,
+                ms: [{
+                    id: 109,
+                    q: 1,
+                    ms: [{
+                        id: 227,
+                        q: 1,
+                        ms: [{
+                            id: 229,
+                            q: 1
+                        }]
+                    }, {
+                        id: 267,
+                        q: 1,
+                        ms: [{
+                            id: 217,
+                            q: 1
+                        }]
+                    }]
+                }, {
+                    id: 245,
+                    q: 1,
+                    ms: [{
+                        id: 1937,
+                        q: 1
+                    }, {
+                        id: -2,
+                        q: 1,
+                        nm: "Grapes of Zamorak",
+                        pic: "https://runescape.wiki/images/3/3b/Grapes_of_Zamorak.png?e5bf1"
+                    }]
+                }]
+            }, {
+                id: 12539,
+                q: 1
+            }]
+        };
+
+        /*
+        Extreme ranging -1
+            Super ranging potion (3) 2444
+                	Dwarf weed potion (unf) 109
+                        	Vial of water 227
+                                Vial 229
+                            Clean dwarf weed 267
+                                Grimy dwarf weed 217
+                    Wine of Zamorak 245
+                        	Jug of water 1937
+                            Grapes of Zamorak -2
+            Grenwall spikes 12539
+        */
+
+        var craft_tree_json = er_json;
+        //var craft_tree_json = kis_json;
+        
+        // HUGE TO DO - handling untradeable items!!
+
+        // BIG PICTURE TO DO
+        // learn to store things in cache - ge data, at least
+        // new crafting trees: manually, make an interactive creator where others can manually craft their own (exp/imp as a txt file), scrape from wiki?
+        // verifying on selection - deselect parents/children
+        // optimise for lowest price
+
+        // for now, assuming an id within a crafting tree will be unique
+        // but i don't actually have any guarantee this is always true, so, todo
+
+        //todo title, img alts
+
+
+
+        // ----------- DOM
+        var drop_down_html = "<select id='treeselect' onChange='changeTree(this.value)'><option value='kwuarm_incense_sticks'>Kwuarm incense sticks</option><option value='extreme_ranging'>Extreme Ranging Potion</option></select>";
+        $("body").append("<div id='updateheader'>" + drop_down_html + "<button id='update'>Update Data</button> <small id='lastupdated'>Last updated ___ </small></div>");
+        $("body").append("<ul id='tree' class='tree'>" + itemToHtml(craft_tree_json) + "</ul>");
+        $("body").append("<table id='selected'></table>");
+
+        function changeTree(selection) {
+            console.log(selection);
+            switch (selection) {
+                case "kwuarm_incense_sticks":
+                    craft_tree_json = kis_json;
+                    $("tree").replaceWith("<ul class='tree'>" + itemToHtml(craft_tree_json) + "</ul>");
+                    break;
+                case "extreme_ranging":
+                    craft_tree_json = er_json;
+                    $("#tree").replaceWith("<ul class='tree'>" + itemToHtml(craft_tree_json) + "</ul>");
+                    break;
+            }
+        }
+
+        // ----------- Getting data
+        const proxy1 = "https://cors-anywhere.herokuapp.com/";
+        const base_url1 = proxy1 + "https://secure.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+        $('#update').click(function() {
+            updateDataInTree();
+            var utc = new Date().toJSON().slice(0, 16).replace(/-/g, '/').replace('T', ' ');
+            $("#lastupdated").text("Last updated " + utc + " (UTC)");
+        })
+
+        function updateDataInTree() {
+            const proxy = "https://cors-anywhere.herokuapp.com/";
+            const base_url = proxy + "https://secure.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=";
+            $("body").find("span").each(function(n, el) {
+                if (el.getAttribute("id") > 0) { // only look up items with a valid ge id
+                    $.getJSON(base_url + el.getAttribute("id"), function(result) {
+                        $("#" + el.getAttribute("id")).replaceWith(updateCellHtml(el.getAttribute("id"), el.getAttribute("data-qty"), result));
+                    });
+                } else {
+                    updateCustomCellHtml(el);
+                }
+            });
+        }
+
+        function updateCustomCellHtml(el) {
+            var icon = el.getAttribute("data-icon");
+            var name = el.getAttribute("data-name");
+            var price = el.getAttribute("data-price");
+            var qty = el.getAttribute("data-qty");
+            var id = el.getAttribute("id");
+            var html = "<span onclick=selectItem(this," + id + "," + qty + ") "
+            html += "id='" + id + "' ";
+            html += "data-qty='" + qty + "' ";
+            html += "data-name='" + name + "' ";
+            html += "data-icon='" + icon + "' ";
+            html += "data-price='" + price + "' ";
+            html += "data-sel='false'>";
+            html += "<img class = 'icon' src='" + icon + "'><br>";
+            html += "<small>" + qty + " x</small> " + name;
+            html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(qty, price) + "</small></span>";
+            return html;
+        }
+
+        function updateCellHtml(id, qty, result) {
+            var icon = result.item.icon;
+            var name = result.item.name;
+            var price = cleanPrice(result.item.current.price);
+            var html = "<span onclick=selectItem(this," + id + "," + qty + ") "
+            html += "id='" + id + "' ";
+            html += "data-qty='" + qty + "' ";
+            html += "data-name='" + name + "' ";
+            html += "data-icon='" + icon + "' ";
+            html += "data-price='" + price + "' ";
+            html += "data-sel='false'>";
+            html += "<img class = 'icon' src='" + icon + "'><br>";
+            html += "<small>" + qty + " x</small> " + name;
+            html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(qty, price) + "</small></span>";
+            return html;
+        }
+
+        // ----------- Drawing out the crafting free
+        function addCommas(nStr) {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+
+        function getPriceString(quantity, price) {
+            if (quantity == 1) {
+                return addCommas(price);
+            } else {
+                return addCommas(quantity * price) + " (" + addCommas(price) + ")";
+            }
+        }
+
+        function cleanPrice(str) {
+            return ("" + str).replace(",", "").replace(".", "").replace("k", "00");
+        }
+
+        function buildCellHtml(item) {
+            //todo combine these better
+            if (item.id > 0) { // if the id is pos, it's tradable and on the ge
+                var icon = ""; 
+                var name = item.id; 
+                var price = "";
+                var html = "<span onclick=selectItem(this," + item.id + "," + item.q + ") "
+                html += "id='" + item.id + "' ";
+                html += "data-qty='" + item.q + "' ";
+                html += "data-name='" + name + "' ";
+                html += "data-icon='" + icon + "' ";
+                html += "data-price='" + price + "' ";
+                html += "data-sel='false'>";
+                //html += "<img class = 'icon' src='" + icon + "'><br>";
+                html += "<small>" + item.q + " x</small> " + name;
+                html += "<br><img class='cns' src='cns.png'><small>" + getPriceString(item.q, price) + "</small></span>";
+                return html;
+            } else { // untradable, can't use ge api
+                var icon = item.pic;
+                var name = item.nm;
+                var price = 0;
+                var html = "<span onclick=selectItem(this," + item.id + "," + item.q + ") "
+                html += "id='" + item.id + "' ";
+                html += "data-qty='" + item.q + "' ";
+                html += "data-name='" + name + "' ";
+                html += "data-icon='" + icon + "' ";
+                html += "data-price='" + price + "' ";
+                html += "data-sel='false'>";
+                //html += "<img class = 'icon' src='" + icon + "'><br>";
+                html += "<small>" + item.q + " x</small> " + name;
+                html += "<br><small class='untradable'>untradable</small></span>";
+                return html;
+            }
+        }
+
+        function itemToHtml(item) {
+            var html = "<li>";
+            html += buildCellHtml(item);
+
+            if (typeof(item.ms) == "undefined" || item.ms.length == 0) { // if leaf                
+                return html + "</li>";
+            } else { // if branch                
+                html += "<ul>";
+                for (material in item.ms) {
+                    html += itemToHtml(item.ms[material]);
+                }
+                html += "</ul>";
+                return html + "</li>";
+            }
+        }
+
+        // ----------- Table of selected nodes
+        var selected = {};
+
+        function getTotalCost() {
+            cost = 0;
+            for (var [item_id, item_data] of Object.entries(selected)) {
+                console.log(item_data.price);
+                cost += item_data.quantity * item_data.price;
+            }
+            // TODO Nan
+            return cost;
+        }
+
+        function getTotalProfit() {
+            return 0;//ge_data[tree_data.id].price - getTotalCost();
+        }
+
+        function getProfitColor(addSymbol) {
+            if (addSymbol) {
+                if (getTotalProfit() >= 0) {
+                    return "id='posprofit'"
+                } else {
+                    return "id='negprofit'"
+                }
+            } else {
+
+                if (getTotalProfit() >= 0) {
+                    return "id='posprofitnosym'"
+                } else {
+                    return "id='negprofitnosym'"
+                }
+            }
+        }
+
+        function deselectConflictingCells(item_id) {
+            // traverse children
+
+            $("#" + item_id).parent().find("span").each(function(el, key) {
+                key.setAttribute("data-sel", "false");
+                delete(selected[key.getAttribute("id")]);
+            });
+            // traverse ancestors
+            $("#" + item_id).parents("li").each(function(index) {
+                $(this).children("span").each(function(el, key) {
+                    key.setAttribute("data-sel", "false");
+                    delete(selected[key.getAttribute("id")]);
+                });
+            });
+        }
+
+        function selectItem(el, item_id, quantity) {
+            
+            // TODO phase out ge_data !!
+            // todo update when we update the data w/ the api
+            console.log(el);
+            
+            var item = {};
+            if (typeof(selected[el.id]) == "undefined") {
+                deselectConflictingCells(el.id);
+                item = {
+                    id: el.id,
+                    qty: el.getAttribute("data-qty"),
+                    name : el.getAttribute("data-name"),
+                    price : el.getAttribute("data-price"),
+                    icon : el.getAttribute("data-icon")
+                };
+                console.log(item);
+                selected[el.id] = item;
+                el.setAttribute("data-sel", "true");
+            } else {
+                delete(selected[el.id]);
+                el.setAttribute("data-sel", "false");
+            }
+
+            new_html = "<tr><th></th><th>Qty</th><th>Name</th><th>Cost</th></tr>";
+            for (var [item_id, item_data] of Object.entries(selected)) {
+                
+                new_html += "<tr>";
+                new_html += "<td><img class = 'tableicon' src='" + item_data.icon + "'></td>";
+                new_html += "<td>" + item_data.qty + "</td>";
+                new_html += "<td>" + item_data.name + "</td>";
+                new_html += "<td class='num'>" + addCommas(item_data.qty * item_data.price) + "</td>";
+                new_html += "</tr>";
+                
+                
+            }
+            // todo neater profit color css - can we make css conditional?
+            
+            new_html += "<tr id='total'><td></td><td></td><td>Total Cost</td><td class='num'>" + addCommas(getTotalCost()) + "</td></tr>";
+            new_html += "<tr><td></td><td></td><td><small " + getProfitColor(false) + ">Profit</small></td><td><small " + getProfitColor(true) + ">" + addCommas(getTotalProfit()) + "</small></td></tr>";
+            $("#selected").html(new_html);
+            
+        }
+    </script>
+
+
+</body></html>
