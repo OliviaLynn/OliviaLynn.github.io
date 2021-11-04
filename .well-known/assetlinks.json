@@ -1,0 +1,9 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.oauth2demo.olivia",
+      "sha256_cert_fingerprints":
+      ["45:0E:6B:74:A4:C9:63:8C:70:3B:87:CA:B7:BD:E2:CB:FA:79:60:0E:BE:D4:6F:EA:77:E7:88:EA:62:C7:E3:A1"]
+    }
+  }]
